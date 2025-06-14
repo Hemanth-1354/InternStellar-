@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>InternS</title>
+    <title>InternStellar🛰️</title>
     <style>
         @keyframes fadeInUp {
             from {
@@ -140,6 +140,7 @@
 
         .dropdown-item {
             display: block;
+            z-index:100;
             padding: 10px 15px;
             color: #ffffff;
             text-decoration: none;
@@ -761,11 +762,11 @@
             <a class="navbar-brand" href="#">InternStellar🛰️</a>
             <div class="navbar-nav">
                 <button class="add-opportunity-btn" onclick="openAddModal()">
-                    + Add New Opportunity
+                    <strong>+ Add New Opportunity</strong>
                 </button>
                 <div class="dropdown">
                     <button class="dropdown-toggle" onclick="toggleDropdown()">
-                        <strong id="usernameDisplay">Loading...</strong>
+                        <strong id="usernameDisplay">{{user.username}}</strong>
                         <span>▼</span>
                     </button>
                     <div class="dropdown-menu" id="userDropdown">
@@ -945,7 +946,7 @@
 
     <script>
         // Initialize app
-        let currentUser = 'john_doe'; // This would come from your Django template
+        let currentUser = {{user.username}}; // This would come from your Django template
         let opportunities = [];
         let filteredOpportunities = [];
 

@@ -1,0 +1,568 @@
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+body {
+    background-color: #000000;
+    color: #ffffff;
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.navbar {
+    background-color: #000000 !important;
+    border-bottom: 1px solid #333333;
+    animation: fadeInDown 0.5s ease-out;
+    backdrop-filter: blur(10px);
+}
+
+.navbar-brand {
+    color: #ffffff !important;
+    font-weight: bold;
+    transition: opacity 0.3s ease;
+}
+
+.navbar-brand:hover {
+    opacity: 0.8;
+}
+
+.nav-link {
+    color: #ffffff !important;
+    transition: all 0.3s ease;
+    position: relative;
+    cursor: pointer;
+}
+
+.nav-link::after {
+    content: "";
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    width: 0;
+    height: 1px;
+    background-color: #ffffff;
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.nav-link:hover {
+    color: #cccccc !important;
+}
+
+.nav-link:hover::after {
+    width: 60%;
+}
+
+.dashboard-header {
+    background-color: #111111;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border-radius: 0.5rem;
+    border: 1px solid #333333;
+    animation: fadeInUp 0.6s ease-out 0.1s both;
+}
+
+.dashboard-header h1 {
+    color: #ffffff;
+    animation: slideInLeft 0.7s ease-out 0.2s both;
+}
+
+.dashboard-header .lead {
+    color: #cccccc;
+    animation: slideInLeft 0.7s ease-out 0.3s both;
+}
+
+.stat-card {
+    border-left: 4px solid #ffffff;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    background-color: #111111;
+    border: 1px solid #333333;
+    border-left: 4px solid #ffffff;
+    transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.08);
+}
+
+.card {
+    background-color: #111111;
+    border: 1px solid #333333;
+    color: #ffffff;
+    transition: all 0.3s ease;
+    margin-bottom: 1rem;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.card-header {
+    background-color: #000000;
+    border-bottom: 1px solid #333333;
+    color: #ffffff;
+    position: relative;
+}
+
+.card-header::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.4);
+    transition: width 0.4s ease;
+}
+
+.card:hover .card-header::before {
+    width: 100%;
+}
+
+.card-title {
+    color: #ffffff;
+}
+
+.card-text {
+    color: #ffffff;
+    font-size: 1.5rem;
+    font-weight: bold;
+    transition: all 0.2s ease;
+}
+
+.stat-card:hover .card-text {
+    transform: scale(1.05);
+}
+
+.btn-primary {
+    background-color: #ffffff;
+    border-color: #ffffff;
+    color: #000000;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #e6e6e6;
+    border-color: #e6e6e6;
+    color: #000000;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.15);
+}
+
+.btn-outline-primary {
+    border-color: #ffffff;
+    color: #ffffff;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-primary:hover {
+    background-color: #ffffff;
+    border-color: #ffffff;
+    color: #000000;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.15);
+}
+
+.btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+    transition: all 0.3s ease;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+    transform: translateY(-1px);
+}
+
+.container {
+    max-width: 1200px;
+}
+
+.theme-toggle {
+    background: none;
+    border: none;
+    color: #ffffff;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-left: 1rem;
+    font-size: 1.2rem;
+}
+
+.theme-toggle:hover {
+    color: #cccccc;
+    transform: scale(1.1);
+}
+
+.search-filter-section {
+    background-color: #111111;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    border: 1px solid #333333;
+    margin-bottom: 2rem;
+}
+
+.job-card {
+    background-color: #111111;
+    border: 1px solid #333333;
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.job-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.08);
+    border-color: #ffffff;
+}
+
+.job-header {
+    display: flex;
+    justify-content: between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.job-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+}
+
+.company-name {
+    color: #cccccc;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+
+.job-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.job-detail-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #cccccc;
+    font-size: 0.9rem;
+}
+
+.badge-custom {
+    background-color: #333333;
+    color: #ffffff;
+    padding: 0.3rem 0.8rem;
+    border-radius: 0.25rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.badge-internship {
+    background-color: #007bff;
+}
+
+.badge-job {
+    background-color: #28a745;
+}
+
+.badge-remote {
+    background-color: #6f42c1;
+}
+
+.badge-onsite {
+    background-color: #fd7e14;
+}
+
+.badge-hybrid {
+    background-color: #20c997;
+}
+
+.badge-ppo {
+    background-color: #ffc107;
+    color: #000000;
+}
+
+.form-select,
+.form-control {
+    background-color: #222222;
+    border: 1px solid #333333;
+    color: #ffffff;
+}
+
+.form-select:focus,
+.form-control:focus {
+    background-color: #222222;
+    border-color: #ffffff;
+    color: #ffffff;
+    box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.25);
+}
+
+.form-select option {
+    background-color: #222222;
+    color: #ffffff;
+}
+
+.form-label {
+    color: #ffffff;
+    font-weight: 500;
+}
+
+/* Light theme styles */
+body.light-theme {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+.light-theme .navbar {
+    background-color: #ffffff !important;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.light-theme .navbar-brand {
+    color: #000000 !important;
+}
+
+.light-theme .nav-link {
+    color: #000000 !important;
+}
+
+.light-theme .nav-link::after {
+    background-color: #000000;
+}
+
+.light-theme .nav-link:hover {
+    color: #666666 !important;
+}
+
+.light-theme .dashboard-header {
+    background-color: #f8f9fa;
+    border: 1px solid #e0e0e0;
+}
+
+.light-theme .dashboard-header h1 {
+    color: #000000;
+}
+
+.light-theme .dashboard-header .lead {
+    color: #666666;
+}
+
+.light-theme .stat-card {
+    border-left: 4px solid #000000;
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-left: 4px solid #000000;
+}
+
+.light-theme .stat-card:hover {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+.light-theme .card {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    color: #000000;
+}
+
+.light-theme .card:hover {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.light-theme .card-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #e0e0e0;
+    color: #000000;
+}
+
+.light-theme .card-header::before {
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.light-theme .card-title {
+    color: #000000;
+}
+
+.light-theme .card-text {
+    color: #000000;
+}
+
+.light-theme .btn-primary {
+    background-color: #000000;
+    border-color: #000000;
+    color: #ffffff;
+}
+
+.light-theme .btn-primary:hover {
+    background-color: #333333;
+    border-color: #333333;
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.light-theme .btn-outline-primary {
+    border-color: #000000;
+    color: #000000;
+}
+
+.light-theme .btn-outline-primary:hover {
+    background-color: #000000;
+    border-color: #000000;
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.light-theme .theme-toggle {
+    color: #000000;
+}
+
+.light-theme .theme-toggle:hover {
+    color: #666666;
+}
+
+.light-theme .search-filter-section {
+    background-color: #f8f9fa;
+    border: 1px solid #e0e0e0;
+}
+
+.light-theme .job-card {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+}
+
+.light-theme .job-card:hover {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    border-color: #000000;
+}
+
+.light-theme .job-title {
+    color: #000000;
+}
+
+.light-theme .company-name {
+    color: #666666;
+}
+
+.light-theme .job-detail-item {
+    color: #666666;
+}
+
+.light-theme .form-select,
+.light-theme .form-control {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    color: #000000;
+}
+
+.light-theme .form-select:focus,
+.light-theme .form-control:focus {
+    background-color: #ffffff;
+    border-color: #000000;
+    color: #000000;
+    box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.25);
+}
+
+.light-theme .form-select option {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+.light-theme .form-label {
+    color: #000000;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+.modal-content {
+    background-color: #111111;
+    border: 1px solid #333333;
+}
+
+.light-theme .modal-content {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+}
+
+.modal-header {
+    border-bottom: 1px solid #333333;
+}
+
+.light-theme .modal-header {
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.modal-footer {
+    border-top: 1px solid #333333;
+}
+
+.light-theme .modal-footer {
+    border-top: 1px solid #e0e0e0;
+}
+
+.btn-close {
+    filter: invert(1);
+}
+
+.light-theme .btn-close {
+    filter: none;
+}
+

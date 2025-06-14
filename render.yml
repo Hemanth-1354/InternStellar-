@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: django-app
+    env: python
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn mainHire.wsgi:application"
+    envVars:
+      - key: DEBUG
+        value: False
+      - key: SECRET_KEY
+        generateValue: true
+      

@@ -1,12 +1,11 @@
 services:
   - type: web
-    name: django-app
+    name: hirecircle-app
     env: python
     buildCommand: "./build.sh"
-    startCommand: "gunicorn mainHire.wsgi:application"
+    startCommand: "gunicorn HireCircle.wsgi:application"
     envVars:
       - key: DEBUG
         value: False
       - key: SECRET_KEY
         generateValue: true
-      

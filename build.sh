@@ -1,7 +1,11 @@
 #!/usr/bin/env bash
-# Exit on error
+
+# Stop execution on any error
 set -o errexit
 
+# Install dependencies from requirements.txt
+pip install --upgrade pip
 pip install -r requirements.txt
-python manage.py collectstatic --no-input
-python manage.py migrate
+
+# (Optional) Collect static files, uncomment if needed
+# python manage.py collectstatic --no-input

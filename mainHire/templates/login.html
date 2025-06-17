@@ -277,6 +277,24 @@
     </p>
 
     <div class="form-container">
+
+
+{% if error_message %}
+    <div class="alert alert-danger" role="alert" style="
+      background-color: #ffebee;
+      color: #c62828;
+      padding: 0.75rem 1.25rem;
+      margin-bottom: 1.5rem;
+      border-radius: 0.5rem;
+      font-size: 0.875rem;
+      border: 1px solid #ef9a9a;
+    ">
+      {{ error_message }}
+    </div>
+  {% endif %}
+
+
+
       <form method="POST" action="{% url 'login' %}">
         {% csrf_token %}
 

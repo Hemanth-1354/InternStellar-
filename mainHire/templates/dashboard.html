@@ -1,1419 +1,1462 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <title>InternStellar🛰️</title>
     <!-- Font Awesome CDN -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link 
+  rel="stylesheet" 
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+  integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+  crossorigin="anonymous" 
+  referrerpolicy="no-referrer"
+/>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    {% comment %}
+    <link rel="stylesheet" href="{% static './styles.css' %}" />
+    {% endcomment %}
+
+<link rel="icon" href="{% static 'assets/lala1.jpg' %}" type="image/x-icon">
     <style>
-/* styles.css */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(15px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes fadeInDown {
-    from {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes slideInLeft {
-    from {
-        opacity: 0;
-        transform: translateX(-15px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-@keyframes slideInRight {
-    from {
-        opacity: 0;
-        transform: translateX(15px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #000000;
-    color: #ffffff;
-    animation: fadeInUp 0.6s ease-out;
-}
-html{
-    padding-down: 30px;
-}
-.navbar {
-    background-color: #000000 !important;
-    border-bottom: 1px solid #333333;
-    padding: 1rem 0;
-    animation: fadeInDown 0.5s ease-out;
-    backdrop-filter: blur(10px);
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-.navbar .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.navbar-brand {
-    font-size: 1.8rem;
-    font-weight: bold;
-    color: #ffffff !important;
-    text-decoration: none;
-    transition: opacity 0.3s ease;
-}
-
-.navbar-brand:hover {
-    opacity: 0.8;
-}
-
-.navbar-nav {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-
-.dropdown {
-    position: relative;
-}
-
-.dropdown-toggle {
-    background: none;
-    border: 1px solid #333333;
-    padding: 8px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: #ffffff;
-    transition: all 0.3s ease;
-}
-
-.dropdown-toggle:hover {
-    border-color: #ffffff;
-    color: #cccccc;
-}
-
-.dropdown-menu {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    background: #111111;
-    border: 1px solid #333333;
-    border-radius: 5px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-    min-width: 200px;
-    display: none;
-    z-index: 1000;
-    animation: fadeInDown 0.3s ease-out;
-}
-
-.dropdown-menu.show {
-    display: block;
-}
-
-.dropdown-item {
-    display: block;
-    z-index: 100;
-    padding: 10px 15px;
-    color: #ffffff;
-    text-decoration: none;
-    border-bottom: 1px solid #333333;
-    transition: all 0.3s ease;
-}
-
-.dropdown-item:hover {
-    background-color: #222222;
-}
-
-.add-opportunity-btn {
-    background-color: #ffffff;
-    color: #000000;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: 500;
-    transition: all 0.3s ease;
-}
-
-.add-opportunity-btn:hover {
-    background-color: #e6e6e6;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.15);
-}
-
-.stats-section {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 15px;
-    margin: 20px 0;
-}
-
-.stat-card {
-    background-color: #111111;
-    border: 1px solid #333333;
-    border-left: 4px solid #ffffff;
-    border-radius: 8px;
-    padding: 15px;
-    text-align: center;
-    transition: all 0.3s ease;
-    animation: fadeInUp 0.6s ease-out 0.1s both;
-}
-
-.stat-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.08);
-}
-
-.stat-card h5 {
-    font-size: 0.9rem;
-    color: #ffffff;
-    margin-bottom: 8px;
-    font-weight: 500;
-}
-
-.stat-card p {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #ffffff;
-    transition: all 0.2s ease;
-}
-
-.stat-card:hover p {
-    transform: scale(1.05);
-}
-
-.opportunities-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 30px 0 20px 0;
-    animation: slideInLeft 0.7s ease-out 0.2s both;
-}
-
-.opportunities-header h2 {
-    color: #ffffff;
-}
-
-.filter-btn {
-    background: none;
-    border: 1px solid #333333;
-    padding: 8px 12px;
-    border-radius: 5px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    color: #ffffff;
-    transition: all 0.3s ease;
-}
-
-.filter-btn:hover {
-    border-color: #ffffff;
-    color: #cccccc;
-}
-
-.filter-section {
-    background-color: #111111;
-    border: 1px solid #333333;
-    border-radius: 8px;
-    padding: 20px;
-    margin-bottom: 20px;
-    display: none;
-    animation: fadeInUp 0.4s ease-out;
-}
-
-.filter-section.show {
-    display: block;
-}
-
-.filter-row {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 15px;
-    margin-bottom: 15px;
-}
-
-.form-group {
-    display: flex;
-    flex-direction: column;
-}
-
-.form-group label {
-    margin-bottom: 5px;
-    font-weight: 500;
-    color: #ffffff;
-}
-
-.form-control,
-.form-select {
-    padding: 8px 12px;
-    border: 1px solid #333333;
-    border-radius: 4px;
-    font-size: 14px;
-    background-color: #222222;
-    color: #ffffff;
-    transition: all 0.3s ease;
-}
-
-.form-control:focus,
-.form-select:focus {
-    background-color: #222222;
-    border-color: #ffffff;
-    color: #ffffff;
-    box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.25);
-    outline: none;
-}
-
-.form-select option {
-    background-color: #222222;
-    color: #ffffff;
-}
-
-.clear-filters-btn {
-    background: none;
-    border: 1px solid #333333;
-    padding: 8px 15px;
-    border-radius: 4px;
-    cursor: pointer;
-    color: #ffffff;
-    transition: all 0.3s ease;
-}
-
-.clear-filters-btn:hover {
-    border-color: #ffffff;
-    color: #cccccc;
-}
-
-.job-listings {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.job-card {
-    background-color: #111111;
-    border: 1px solid #333333;
-    border-radius: 8px;
-    padding: 20px;
-    transition: all 0.3s ease;
-    animation: fadeInUp 0.6s ease-out;
-}
-
-.job-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.08);
-    border-color: #ffffff;
-}
-
-.job-header {
-    display: flex;
-    justify-content: between;
-    align-items: flex-start;
-    margin-bottom: 15px;
-}
-
-.job-title {
-    font-size: 1.25rem;
-    font-weight: bold;
-    color: #ffffff;
-    margin-bottom: 5px;
-}
-
-.company-name {
-    color: #cccccc;
-    font-size: 1.1rem;
-    margin-bottom: 10px;
-}
-
-.job-details {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    margin-bottom: 15px;
-}
-
-.job-detail {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    color: #cccccc;
-    font-size: 0.9rem;
-}
-
-.job-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 15px;
-}
-
-.job-tag {
-    background-color: #333333;
-    color: #ffffff;
-    padding: 4px 8px;
-    border-radius: 4px;
-    font-size: 0.8rem;
-    font-weight: 500;
-}
-
-.job-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.job-meta {
-    color: #cccccc;
-    font-size: 0.85rem;
-}
-
-.apply-btn {
-    background-color: #ffffff;
-    color: #000000;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 4px;
-    cursor: pointer;
-    text-decoration: none;
-    display: inline-block;
-    font-weight: 500;
-    transition: all 0.3s ease;
-}
-
-.apply-btn:hover {
-    background-color: #e6e6e6;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.15);
-}
-
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-}
-
-.modal.show {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.modal-content {
-    background-color: #111111;
-    border: 1px solid #333333;
-    border-radius: 8px;
-    width: 90%;
-    max-width: 600px;
-    max-height: 90vh;
-    overflow-y: auto;
-    animation: fadeInUp 0.3s ease-out;
-}
-
-.modal-header {
-    padding: 20px 20px 0 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #333333;
-}
-
-.modal-title {
-    font-size: 1.3rem;
-    font-weight: bold;
-    color: #ffffff;
-}
-
-.btn-close {
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-    color: #ffffff;
-    transition: all 0.3s ease;
-}
-
-.btn-close:hover {
-    color: #cccccc;
-}
-
-.modal-body {
-    padding: 20px;
-}
-
-.modal-footer {
-    padding: 0 20px 20px 20px;
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-    border-top: 1px solid #333333;
-}
-
-.btn {
-    padding: 8px 16px;
-    border-radius: 4px;
-    cursor: pointer;
-    border: 1px solid #333333;
-    transition: all 0.3s ease;
-}
-
-.btn-primary {
-    background-color: #ffffff;
-    color: #000000;
-    border-color: #ffffff;
-    font-weight: 500;
-}
-
-.btn-primary:hover {
-    background-color: #e6e6e6;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.15);
-}
-
-.btn-outline-primary {
-    background: none;
-    color: #ffffff;
-    border-color: #ffffff;
-    font-weight: 500;
-}
-
-.btn-outline-primary:hover {
-    background-color: #ffffff;
-    color: #000000;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.15);
-}
-
-.row {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 15px;
-    margin-bottom: 15px;
-}
-
-.no-opportunities {
-    text-align: center;
-    padding: 40px;
-    color: #cccccc;
-}
-
-/* Light theme styles */
-body.light-theme {
-    background-color: #ffffff;
-    color: #000000;
-}
-
-.light-theme .navbar {
-    background-color: #ffffff !important;
-    border-bottom: 1px solid #e0e0e0;
-}
-
-.light-theme .navbar-brand {
-    color: #000000 !important;
-}
-
-.light-theme .dropdown-toggle {
-    border-color: #e0e0e0;
-    color: #000000;
-}
-
-.light-theme .dropdown-toggle:hover {
-    border-color: #000000;
-    color: #666666;
-}
-
-.light-theme .dropdown-menu {
-    background: #ffffff;
-    border-color: #e0e0e0;
-}
-
-.light-theme .dropdown-item {
-    color: #000000;
-    border-bottom-color: #f0f0f0;
-}
-
-.light-theme .dropdown-item:hover {
-    background-color: #f8f9fa;
-}
-
-.light-theme .add-opportunity-btn {
-    background-color: #000000;
-    color: #ffffff;
-}
-
-.light-theme .add-opportunity-btn:hover {
-    background-color: #333333;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-.light-theme .stat-card {
-    background-color: #ffffff;
-    border: 1px solid #e0e0e0;
-    border-left: 4px solid #000000;
-}
-
-.light-theme .stat-card:hover {
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
-}
-
-.light-theme .stat-card h5,
-.light-theme .stat-card p {
-    color: #000000;
-}
-
-.light-theme .opportunities-header h2 {
-    color: #000000;
-}
-
-.light-theme .filter-btn {
-    border-color: #e0e0e0;
-    color: #000000;
-}
-
-.light-theme .filter-btn:hover {
-    border-color: #000000;
-    color: #666666;
-}
-
-.light-theme .filter-section {
-    background-color: #f8f9fa;
-    border-color: #e0e0e0;
-}
-
-.light-theme .form-group label {
-    color: #000000;
-}
-
-.light-theme .form-control,
-.light-theme .form-select {
-    background-color: #ffffff;
-    border-color: #e0e0e0;
-    color: #000000;
-}
-
-.light-theme .form-control:focus,
-.light-theme .form-select:focus {
-    border-color: #000000;
-    box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.25);
-}
-
-.light-theme .form-select option {
-    background-color: #ffffff;
-    color: #000000;
-}
-
-.light-theme .clear-filters-btn {
-    border-color: #e0e0e0;
-    color: #000000;
-}
-
-.light-theme .clear-filters-btn:hover {
-    border-color: #000000;
-    color: #666666;
-}
-
-.light-theme .job-card {
-    background-color: #ffffff;
-    border-color: #e0e0e0;
-}
-
-.light-theme .job-card:hover {
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
-    border-color: #000000;
-}
-
-.light-theme .job-title {
-    color: #000000;
-}
-
-.light-theme .company-name,
-.light-theme .job-detail,
-.light-theme .job-meta {
-    color: #666666;
-}
-
-.light-theme .job-tag {
-    background-color: #f8f9fa;
-    color: #000000;
-}
-
-.light-theme .apply-btn {
-    background-color: #000000;
-    color: #ffffff;
-}
-
-.light-theme .apply-btn:hover {
-    background-color: #333333;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-.light-theme .modal-content {
-    background-color: #ffffff;
-    border-color: #e0e0e0;
-}
-
-.light-theme .modal-header {
-    border-bottom-color: #e0e0e0;
-}
-
-.light-theme .modal-title,
-.light-theme .btn-close {
-    color: #000000;
-}
-
-.light-theme .modal-footer {
-    border-top-color: #e0e0e0;
-}
-
-.light-theme .btn-primary {
-    background-color: #000000;
-    color: #ffffff;
-    border-color: #000000;
-}
-
-.light-theme .btn-primary:hover {
-    background-color: #333333;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-.light-theme .btn-outline-primary {
-    color: #000000;
-    border-color: #000000;
-}
-
-.light-theme .btn-outline-primary:hover {
-    background-color: #000000;
-    color: #ffffff;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-.light-theme .no-opportunities {
-    color: #666666;
-}
-
-@media (prefers-reduced-motion: reduce) {
-    * {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-    }
-}
-
-/* Theme toggle button */
-.theme-toggle {
-    background: none;
-    border: none;
-    color: #ffffff;
-    padding: 0.5rem;
-    border-radius: 0.25rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin-left: 1rem;
-    font-size: 1.2rem;
-}
-
-.theme-toggle:hover {
-    color: #cccccc;
-    transform: scale(1.1);
-}
-
-.light-theme .theme-toggle {
-    color: #000000;
-}
-
-.light-theme .theme-toggle:hover {
-    color: #666666;
-}
-    <!-- Icon Colors  -->
-    .fa-moon, .fa-sun {
-        color: #6c5ce7; /* Purple for theme toggle */
-    }
-    
-    .fa-briefcase {
-        color: #0984e3; /* Blue for opportunities */
-    }
-    
-    .fa-sign-out-alt {
-        color: #d63031; /* Red for logout */
-    }
-    
-    .fa-building {
-        color: #e17055; /* Coral for company */
-    }
-    
-    .fa-user-tie {
-        color: #00cec9; /* Teal for role */
-    }
-    
-    .fa-tag {
-        color: #a29bfe; /* Light purple for type */
-    }
-    
-    .fa-laptop-house {
-        color: #fd79a8; /* Pink for work mode */
-    }
-    
-    .fa-map-marker-alt {
-        color: #e84393; /* Dark pink for location */
-    }
-    
-    .fa-money-bill-wave {
-        color: #00b894; /* Green for stipend */
-    }
-    
-    .fa-file-contract {
-        color: #fdcb6e; /* Yellow for PPO */
-    }
-    
-    .fa-link {
-        color: #74b9ff; /* Light blue for link */
-    }
-    
-    .fa-align-left {
-        color: #a5b1c2; /* Gray for description */
-    }
-    
-    .fa-edit {
-        color: #3498db; /* Blue for edit */
-    }
-    
-    .fa-trash {
-        color: #e74c3c; /* Red for delete */
-    }
-    
-    .fa-user {
-        color: #9b59b6; /* Purple for posted by */
-    }
-    
-    .fa-clock {
-        color: #7f8c8d; /* Dark gray for time */
-    }
-    
-    /* Green Apply Button */
-    .apply-btn {
+      /* styles.css */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(15px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes fadeInDown {
+        from {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes slideInLeft {
+        from {
+          opacity: 0;
+          transform: translateX(-15px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      @keyframes slideInRight {
+        from {
+          opacity: 0;
+          transform: translateX(15px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'Poppins',"Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #000000;
+        color: #ffffff;
+        animation: fadeInUp 0.6s ease-out;
+        line-height: 1.6;
+      }
+      
+      .navbar {
+        background-color: #000000 !important;
+        border-bottom: 1px solid #333333;
+        padding: 1rem 0;
+        animation: fadeInDown 0.5s ease-out;
+        backdrop-filter: blur(10px);
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      .navbar .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .navbar-brand {
+        font-size: 2.0rem;
+        font-weight: 700;
+        color: #ffffff !important;
+        text-decoration: none;
+        transition: opacity 0.3s ease;
+        letter-spacing: -0.5px;
+      }
+
+      .navbar-brand:hover {
+        opacity: 0.8;
+      }
+
+      .navbar-nav {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+
+      .dropdown {
+        position: relative;
+      }
+
+       h1, h2, h3, h4, h5, h6 {
+        font-weight: 600;
+        letter-spacing: -0.5px;
+      }
+
+      .dropdown-toggle {
+        background: none;
+        border: 1px solid #333333;
+        padding: 8px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: #ffffff;
+        transition: all 0.3s ease;
+      }
+
+      .dropdown-toggle:hover {
+        border-color: #ffffff;
+        color: #cccccc;
+      }
+
+      .dropdown-menu {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background: #111111;
+        border: 1px solid #333333;
+        border-radius: 5px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        min-width: 200px;
+        display: none;
+        z-index: 1000;
+        animation: fadeInDown 0.3s ease-out;
+      }
+
+      .dropdown-menu.show {
+        display: block;
+      }
+
+      .dropdown-item {
+        display: block;
+        z-index: 100;
+        padding: 10px 15px;
+        color: #ffffff;
+        text-decoration: none;
+        border-bottom: 1px solid #333333;
+        transition: all 0.3s ease;
+      }
+
+      .dropdown-item:hover {
+        background-color: #222222;
+      }
+
+      .add-opportunity-btn {
+        background-color: #ffffff;
+        color: #000000;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: 500;
+        transition: all 0.3s ease;
+      }
+
+      .add-opportunity-btn:hover {
+        background-color: #e6e6e6;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(255, 255, 255, 0.15);
+      }
+
+      .stats-section {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 15px;
+        margin: 20px 0;
+      }
+
+      .stat-card {
+        background-color: #111111;
+        border: 1px solid #333333;
+        border-left: 4px solid #ffffff;
+        border-radius: 8px;
+        padding: 15px;
+        text-align: center;
+        transition: all 0.3s ease;
+        animation: fadeInUp 0.6s ease-out 0.1s both;
+      }
+
+      .stat-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(255, 255, 255, 0.08);
+      }
+
+      .stat-card h5 {
+        font-size: 0.9rem;
+        color: #ffffff;
+        margin-bottom: 8px;
+        font-weight: 500;
+      }
+
+      .stat-card p {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #ffffff;
+        transition: all 0.2s ease;
+      }
+
+      .stat-card:hover p {
+        transform: scale(1.05);
+      }
+
+      .opportunities-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 30px 0 20px 0;
+        animation: slideInLeft 0.7s ease-out 0.2s both;
+      }
+
+      .opportunities-header h2 {
+        color: #ffffff;
+      }
+
+      .filter-btn {
+        background: none;
+        border: 1px solid #333333;
+        padding: 8px 12px;
+        border-radius: 5px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        color: #ffffff;
+        transition: all 0.3s ease;
+      }
+
+      .filter-btn:hover {
+        border-color: #ffffff;
+        color: #cccccc;
+      }
+
+      .filter-section {
+        background-color: #111111;
+        border: 1px solid #333333;
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        display: none;
+        animation: fadeInUp 0.4s ease-out;
+      }
+
+      .filter-section.show {
+        display: block;
+      }
+
+      .filter-row {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
+        margin-bottom: 15px;
+      }
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .form-group label {
+        margin-bottom: 5px;
+        font-weight: 500;
+        color: #ffffff;
+      }
+
+      .form-control,
+      .form-select {
+        padding: 8px 12px;
+        border: 1px solid #333333;
+        border-radius: 4px;
+        font-size: 14px;
+        background-color: #222222;
+        color: #ffffff;
+        transition: all 0.3s ease;
+      }
+
+      .form-control:focus,
+      .form-select:focus {
+        background-color: #222222;
+        border-color: #ffffff;
+        color: #ffffff;
+        box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.25);
+        outline: none;
+      }
+
+      .form-select option {
+        background-color: #222222;
+        color: #ffffff;
+      }
+
+      .clear-filters-btn {
+        background: none;
+        border: 1px solid #333333;
+        padding: 8px 15px;
+        border-radius: 4px;
+        cursor: pointer;
+        color: #ffffff;
+        transition: all 0.3s ease;
+      }
+
+      .clear-filters-btn:hover {
+        border-color: #ffffff;
+        color: #cccccc;
+      }
+
+      .job-listings {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .job-card {
+        background-color: #111111;
+        border: 1px solid #333333;
+        border-radius: 8px;
+        padding: 20px;
+        transition: all 0.3s ease;
+        animation: fadeInUp 0.6s ease-out;
+      }
+
+      .job-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(255, 255, 255, 0.08);
+        border-color: #ffffff;
+      }
+
+      .job-header {
+        display: flex;
+        justify-content: between;
+        align-items: flex-start;
+        margin-bottom: 15px;
+      }
+
+      .job-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: #ffffff;
+        margin-bottom: 5px;
+        letter-spacing: -0.3px;
+      }
+
+      .company-name {
+        color: #cccccc;
+        font-size: 1.1rem;
+        margin-bottom: 10px;
+        font-weight: 400;
+      }
+
+      .job-details {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        margin-bottom: 15px;
+      }
+
+      .job-detail {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        color: #cccccc;
+        font-size: 0.9rem;
+      }
+
+      .job-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 15px;
+      }
+
+      .job-tag {
+        background-color: #333333;
+        color: #ffffff;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 0.8rem;
+        font-weight: 500;
+      }
+
+      .job-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .job-meta {
+        color: #cccccc;
+        font-size: 0.85rem;
+      }
+
+      .apply-btn {
+        background-color: #ffffff;
+        color: #000000;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 4px;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-block;
+        font-weight: 500;
+        transition: all 0.3s ease;
+      }
+
+      .apply-btn:hover {
+        background-color: #e6e6e6;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(255, 255, 255, 0.15);
+      }
+
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+      }
+
+      .modal.show {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .modal-content {
+        background-color: #111111;
+        border: 1px solid #333333;
+        border-radius: 8px;
+        width: 90%;
+        max-width: 600px;
+        max-height: 90vh;
+        overflow-y: auto;
+        animation: fadeInUp 0.3s ease-out;
+      }
+
+      .modal-header {
+        padding: 20px 20px 0 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #333333;
+      }
+
+      .modal-title {
+        font-size: 1.3rem;
+        font-weight: bold;
+        color: #ffffff;
+      }
+
+      .btn-close {
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: #ffffff;
+        transition: all 0.3s ease;
+      }
+
+      .btn-close:hover {
+        color: #cccccc;
+      }
+
+      .modal-body {
+        padding: 20px;
+      }
+
+      .modal-footer {
+        padding: 0 20px 20px 20px;
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+        border-top: 1px solid #333333;
+      }
+
+      .btn {
+        padding: 8px 16px;
+        border-radius: 4px;
+        cursor: pointer;
+        border: 1px solid #333333;
+        transition: all 0.3s ease;
+      }
+
+      .btn-primary {
+        background-color: #ffffff;
+        color: #000000;
+        border-color: #ffffff;
+        font-weight: 500;
+      }
+
+      .btn-primary:hover {
+        background-color: #e6e6e6;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(255, 255, 255, 0.15);
+      }
+
+      .btn-outline-primary {
+        background: none;
+        color: #ffffff;
+        border-color: #ffffff;
+        font-weight: 500;
+      }
+
+      .btn-outline-primary:hover {
+        background-color: #ffffff;
+        color: #000000;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(255, 255, 255, 0.15);
+      }
+
+      .row {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 15px;
+        margin-bottom: 15px;
+      }
+
+      .no-opportunities {
+        text-align: center;
+        padding: 40px;
+        color: #cccccc;
+      }
+
+      /* Light theme styles */
+      body.light-theme {
+        background-color: #ffffff;
+        color: #000000;
+      }
+
+      .light-theme .navbar {
+        background-color: #ffffff !important;
+        border-bottom: 1px solid #e0e0e0;
+      }
+
+      .light-theme .navbar-brand {
+        color: #000000 !important;
+      }
+
+      .light-theme .dropdown-toggle {
+        border-color: #e0e0e0;
+        color: #000000;
+      }
+
+      .light-theme .dropdown-toggle:hover {
+        border-color: #000000;
+        color: #666666;
+      }
+
+      .light-theme .dropdown-menu {
+        background: #ffffff;
+        border-color: #e0e0e0;
+      }
+
+      .light-theme .dropdown-item {
+        color: #000000;
+        border-bottom-color: #f0f0f0;
+      }
+
+      .light-theme .dropdown-item:hover {
+        background-color: #f8f9fa;
+      }
+
+      .light-theme .add-opportunity-btn {
+        background-color: #000000;
+        color: #ffffff;
+      }
+
+      .light-theme .add-opportunity-btn:hover {
+        background-color: #333333;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
+
+      .light-theme .stat-card {
+        background-color: #ffffff;
+        border: 1px solid #e0e0e0;
+        border-left: 4px solid #000000;
+      }
+
+      .light-theme .stat-card:hover {
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+      }
+
+      .light-theme .stat-card h5,
+      .light-theme .stat-card p {
+        color: #000000;
+      }
+
+      .light-theme .opportunities-header h2 {
+        color: #000000;
+      }
+
+      .light-theme .filter-btn {
+        border-color: #e0e0e0;
+        color: #000000;
+      }
+
+      .light-theme .filter-btn:hover {
+        border-color: #000000;
+        color: #666666;
+      }
+
+      .light-theme .filter-section {
+        background-color: #f8f9fa;
+        border-color: #e0e0e0;
+      }
+
+      .light-theme .form-group label {
+        color: #000000;
+      }
+
+      .light-theme .form-control,
+      .light-theme .form-select {
+        background-color: #ffffff;
+        border-color: #e0e0e0;
+        color: #000000;
+      }
+
+      .light-theme .form-control:focus,
+      .light-theme .form-select:focus {
+        border-color: #000000;
+        box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.25);
+      }
+
+      .light-theme .form-select option {
+        background-color: #ffffff;
+        color: #000000;
+      }
+
+      .light-theme .clear-filters-btn {
+        border-color: #e0e0e0;
+        color: #000000;
+      }
+
+      .light-theme .clear-filters-btn:hover {
+        border-color: #000000;
+        color: #666666;
+      }
+
+      .light-theme .job-card {
+        background-color: #ffffff;
+        border-color: #e0e0e0;
+      }
+
+      .light-theme .job-card:hover {
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        border-color: #000000;
+      }
+
+      .light-theme .job-title {
+        color: #000000;
+      }
+
+      .light-theme .company-name,
+      .light-theme .job-detail,
+      .light-theme .job-meta {
+        color: #666666;
+      }
+
+      .light-theme .job-tag {
+        background-color: #f8f9fa;
+        color: #000000;
+      }
+
+      .light-theme .apply-btn {
+        background-color: #000000;
+        color: #ffffff;
+      }
+
+      .light-theme .apply-btn:hover {
+        background-color: #333333;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
+
+      .light-theme .modal-content {
+        background-color: #ffffff;
+        border-color: #e0e0e0;
+      }
+
+      .light-theme .modal-header {
+        border-bottom-color: #e0e0e0;
+      }
+
+      .light-theme .modal-title,
+      .light-theme .btn-close {
+        color: #000000;
+      }
+
+      .light-theme .modal-footer {
+        border-top-color: #e0e0e0;
+      }
+
+      .light-theme .btn-primary {
+        background-color: #000000;
+        color: #ffffff;
+        border-color: #000000;
+      }
+
+      .light-theme .btn-primary:hover {
+        background-color: #333333;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
+
+      .light-theme .btn-outline-primary {
+        color: #000000;
+        border-color: #000000;
+      }
+
+      .light-theme .btn-outline-primary:hover {
+        background-color: #000000;
+        color: #ffffff;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
+
+      .light-theme .no-opportunities {
+        color: #666666;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+
+      /* Theme toggle button */
+      .theme-toggle {
+        background: none;
+        border: none;
+        color: #ffffff;
+        padding: 0.5rem;
+        border-radius: 0.25rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-left: 1rem;
+        font-size: 1.2rem;
+      }
+
+      .theme-toggle:hover {
+        color: #cccccc;
+        transform: scale(1.1);
+      }
+
+      .light-theme .theme-toggle {
+        color: #000000;
+      }
+
+      .light-theme .theme-toggle:hover {
+        color: #666666;
+     
+
+      /* Green Apply Button */
+      .apply-btn {
         background-color: #2ecc71 !important; /* Green background */
         color: white !important;
         transition: all 0.3s;
-    }
-    
-    .apply-btn:hover {
+      }
+
+      .apply-btn:hover {
         background-color: #27ae60 !important; /* Darker green on hover */
         transform: translateY(-2px);
         box-shadow: 0 4px 8px rgba(46, 204, 113, 0.3);
-    }
-    
-    .light-theme .apply-btn {
+      }
+
+      .light-theme .apply-btn {
         background-color: #2ecc71 !important;
         color: white !important;
-    }
-    
-    /* Job Tag Colors */
-    .job-tag {
+      }
+
+      /* Job Tag Colors */
+      .job-tag {
         background-color: #3498db; /* Blue tag */
         color: white;
-    }
-    
-    .job-tag:nth-child(2) {
+      }
+
+      .job-tag:nth-child(2) {
         background-color: #9b59b6; /* Purple tag */
-    }
-    
-    /* Stats Card Icons */
-    .stat-card h5::before {
+      }
+
+      /* Stats Card Icons */
+      .stat-card h5::before {
         margin-right: 8px;
-    }
-    
-    #totalJobs + h5::before {
+      }
+
+      #totalJobs + h5::before {
         content: "📊";
-    }
-    
-    #totalInternships + h5::before {
+      }
+
+      #totalInternships + h5::before {
         content: "🎓";
-    }
-    
-    #remoteJobs + h5::before {
+      }
+
+      #remoteJobs + h5::before {
         content: "🏠";
-    }
-    
-    #ppoJobs + h5::before {
+      }
+
+      #ppoJobs + h5::before {
         content: "📝";
-    }
-    
-    /* Filter Section Icons */
-    .filter-btn i {
+      }
+
+      /* Filter Section Icons */
+      .filter-btn i {
         color: #3498db; /* Blue for filter icon */
-    }
-    
-    .clear-filters-btn i {
+      }
+
+      .clear-filters-btn i {
         color: #e74c3c; /* Red for clear filters */
-    }
+      }
 
-        /* Additional CSS that wasn't in your original styles.css */
-        /* Toast Notifications */
-        .toast {
-            visibility: hidden;
-            min-width: 250px;
-            margin-left: -125px;
-            background-color: #333;
-            color: #fff;
-            text-align: center;
-            border-radius: 4px;
-            padding: 16px;
-            position: fixed;
-            z-index: 1100;
-            left: 50%;
-            bottom: 30px;
-            font-size: 14px;
-            opacity: 0;
-            transition: opacity 0.3s, bottom 0.3s;
+      /* Additional CSS that wasn't in your original styles.css */
+      /* Toast Notifications */
+      .toast {
+        visibility: hidden;
+        min-width: 250px;
+        margin-left: -125px;
+        background-color: #333;
+        color: #fff;
+        text-align: center;
+        border-radius: 4px;
+        padding: 16px;
+        position: fixed;
+        z-index: 1100;
+        left: 50%;
+        bottom: 30px;
+        font-size: 14px;
+        opacity: 0;
+        transition: opacity 0.3s, bottom 0.3s;
+      }
+
+      .toast.show {
+        visibility: visible;
+        opacity: 1;
+        bottom: 50px;
+      }
+
+      .toast.success {
+        background-color: #4caf50;
+      }
+
+      .toast.error {
+        background-color: #f44336;
+      }
+
+      .toast.warning {
+        background-color: #ff9800;
+      }
+
+      /* Job Actions */
+      .job-actions {
+        display: flex;
+        gap: 10px;
+      }
+
+      .edit-btn,
+      .delete-btn {
+        background: none;
+        border: none;
+        color: #666;
+        cursor: pointer;
+        font-size: 16px;
+        transition: color 0.3s;
+        padding: 5px;
+
+      }
+
+      .edit-btn:hover {
+        color: #2196f3;
+      }
+
+      .delete-btn:hover {
+        color: #f44336;
+      }
+
+      .light-theme .edit-btn,
+      .light-theme .delete-btn {
+        color: #999;
+      }
+
+      /* Theme Toggle */
+      .theme-toggle {
+        background: none;
+        border: none;
+        color: #fff;
+        font-size: 1.2rem;
+        cursor: pointer;
+        margin-right: 15px;
+        padding: 5px 10px;
+        border-radius: 4px;
+        transition: all 0.3s;
+      }
+
+      .theme-toggle:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+
+      .light-theme .theme-toggle {
+        color: #333;
+      }
+
+      .light-theme .theme-toggle:hover {
+        background-color: rgba(0, 0, 0, 0.05);
+      }
+
+      /* Responsive Improvements */
+      @media (max-width: 768px) {
+        .navbar-nav {
+          flex-direction: row;
+          flex-wrap: wrap;
+          gap: 10px;
         }
 
-        .toast.show {
-            visibility: visible;
-            opacity: 1;
-            bottom: 50px;
+        .stats-section {
+          grid-template-columns: 1fr 1fr;
         }
 
-        .toast.success {
-            background-color: #4CAF50;
+        .filter-row {
+          grid-template-columns: 1fr;
         }
 
-        .toast.error {
-            background-color: #f44336;
+        .job-footer {
+          flex-direction: column;
+          gap: 10px;
+          align-items: flex-start;
         }
 
-        .toast.warning {
-            background-color: #ff9800;
-        }
-
-        /* Job Actions */
         .job-actions {
-            display: flex;
-            gap: 10px;
+          margin-top: 10px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .stats-section {
+          grid-template-columns: 1fr;
         }
 
-        .edit-btn, .delete-btn {
-            background: none;
-            border: none;
-            color: #666;
-            cursor: pointer;
-            font-size: 16px;
-            transition: color 0.3s;
-            padding: 5px;
+        .navbar-brand {
+          font-size: 1.4rem;
         }
 
-        .edit-btn:hover {
-            color: #2196F3;
+        .add-opportunity-btn {
+          padding: 8px 12px;
+          font-size: 0.9rem;
         }
-
-        .delete-btn:hover {
-            color: #f44336;
-        }
-
-        .light-theme .edit-btn, 
-        .light-theme .delete-btn {
-            color: #999;
-        }
-
-        /* Theme Toggle */
-        .theme-toggle {
-            background: none;
-            border: none;
-            color: #fff;
-            font-size: 1.2rem;
-            cursor: pointer;
-            margin-right: 15px;
-            padding: 5px 10px;
-            border-radius: 4px;
-            transition: all 0.3s;
-        }
-
-        .theme-toggle:hover {
-            background-color: rgba(255,255,255,0.1);
-        }
-
-        .light-theme .theme-toggle {
-            color: #333;
-        }
-
-        .light-theme .theme-toggle:hover {
-            background-color: rgba(0,0,0,0.05);
-        }
-
-        /* Responsive Improvements */
-        @media (max-width: 768px) {
-            .navbar-nav {
-                flex-direction: row;
-                flex-wrap: wrap;
-                gap: 10px;
-            }
-            
-            .stats-section {
-                grid-template-columns: 1fr 1fr;
-            }
-            
-            .filter-row {
-                grid-template-columns: 1fr;
-            }
-
-            .job-footer {
-                flex-direction: column;
-                gap: 10px;
-                align-items: flex-start;
-            }
-
-            .job-actions {
-                margin-top: 10px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .stats-section {
-                grid-template-columns: 1fr;
-            }
-
-            .navbar-brand {
-                font-size: 1.4rem;
-            }
-
-            .add-opportunity-btn {
-                padding: 8px 12px;
-                font-size: 0.9rem;
-            }
-        }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <!-- Notification Toast -->
     <div id="toast" class="toast"></div>
 
     <nav class="navbar">
-        <div class="container">
-            <a class="navbar-brand" href="#">InternStellar🛰️</a>
-            <div class="navbar-nav">
-                <button class="theme-toggle" onclick="toggleTheme()">
-                    <i class="fas fa-moon"></i>
-                </button>
-                <button class="add-opportunity-btn" onclick="openAddModal()">
-                    <strong>+ Add New Opportunity</strong>
-                </button>
-                <div class="dropdown">
-                    <button class="dropdown-toggle" onclick="toggleDropdown()">
-                        <strong id="usernameDisplay">{{user.username}}</strong>
-                        <span>▼</span>
-                    </button>
-                    <div class="dropdown-menu" id="userDropdown">
-                        <a href="#" class="dropdown-item" onclick="showMyOpportunities()">
-                            <i class="fas fa-briefcase"></i> My Posted Opportunities
-                        </a>
-                        <a href="#" class="dropdown-item" onclick="logout()">
-                            <i class="fas fa-sign-out-alt"></i> Logout
-                        </a>
-                    </div>
-                </div>
+      <div class="container">
+        <a class="navbar-brand" href="#">InternStellar🛰️</a>
+        <div class="navbar-nav">
+          <button class="theme-toggle" onclick="toggleTheme()">
+            <i class="fas fa-moon"></i>
+          </button>
+          <button class="add-opportunity-btn" onclick="openAddModal()">
+            <strong>+ Add New Opportunity</strong>
+          </button>
+          <div class="dropdown">
+            <button class="dropdown-toggle" onclick="toggleDropdown()">
+              <strong id="usernameDisplay">{{user.username}}</strong>
+              <span>▼</span>
+            </button>
+            <div class="dropdown-menu" id="userDropdown">
+              <a href="#" class="dropdown-item" onclick="showMyOpportunities()">
+                <i class="fas fa-briefcase"></i> My Posted Opportunities
+              </a>
+              <a href="#" class="dropdown-item" onclick="logout()">
+                <i class="fas fa-sign-out-alt"></i> Logout
+              </a>
             </div>
+          </div>
         </div>
+      </div>
     </nav>
 
     <div class="container">
-        <!-- Stats Section -->
-        <div class="stats-section">
-            <div class="stat-card">
-                <h5>Total Jobs</h5>
-                <p id="totalJobs">0</p>
-            </div>
-            <div class="stat-card">
-                <h5>Internships</h5>
-                <p id="totalInternships">0</p>
-            </div>
-            <div class="stat-card">
-                <h5>Remote Jobs</h5>
-                <p id="remoteJobs">0</p>
-            </div>
-            <div class="stat-card">
-                <h5>With PPO</h5>
-                <p id="ppoJobs">0</p>
-            </div>
+      <!-- Stats Section -->
+      <div class="stats-section">
+        <div class="stat-card">
+          <h5>Total Jobs</h5>
+          <p id="totalJobs">0</p>
         </div>
+        <div class="stat-card">
+          <h5>Internships</h5>
+          <p id="totalInternships">0</p>
+        </div>
+        <div class="stat-card">
+          <h5>Remote Jobs</h5>
+          <p id="remoteJobs">0</p>
+        </div>
+        <div class="stat-card">
+          <h5>With PPO</h5>
+          <p id="ppoJobs">0</p>
+        </div>
+      </div>
 
-        <!-- Opportunities Header -->
-        <div class="opportunities-header">
-            <h2>Latest Opportunities</h2>
-            <button class="filter-btn" onclick="toggleFilters()">
-                <i class="fas fa-filter"></i> Filters
+      <!-- Opportunities Header -->
+      <div class="opportunities-header">
+        <h2>Latest Opportunities</h2>
+        <button class="filter-btn" onclick="toggleFilters()">
+          <i class="fas fa-filter"></i> Filters
+        </button>
+      </div>
+
+      <!-- Filter Section -->
+      <div class="filter-section" id="filterSection">
+        <div class="filter-row">
+          <div class="form-group">
+            <label><i class="fas fa-search"></i> Search</label>
+            <input
+              type="text"
+              class="form-control"
+              id="searchInput"
+              placeholder="Search by company or role..."
+            />
+          </div>
+          <div class="form-group">
+            <label><i class="fas fa-briefcase"></i> Type</label>
+            <select class="form-select" id="typeFilter">
+              <option value="">All</option>
+              <option value="job">Job</option>
+              <option value="internship">Internship</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label><i class="fas fa-laptop-house"></i> Work Mode</label>
+            <select class="form-select" id="modeFilter">
+              <option value="">All</option>
+              <option value="remote">Remote</option>
+              <option value="onsite">On-site</option>
+              <option value="hybrid">Hybrid</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label><i class="fas fa-file-contract"></i> PPO</label>
+            <select class="form-select" id="ppoFilter">
+              <option value="">All</option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
+          </div>
+        </div>
+        <div class="filter-row">
+          <div class="form-group">
+            <label><i class="fas fa-calendar-day"></i> From Date</label>
+            <input type="date" class="form-control" id="fromDate" />
+          </div>
+          <div class="form-group">
+            <label><i class="fas fa-calendar-day"></i> To Date</label>
+            <input type="date" class="form-control" id="toDate" />
+          </div>
+          <div class="form-group">
+            <label>&nbsp;</label>
+            <button class="clear-filters-btn" onclick="clearFilters()">
+              <i class="fas fa-broom"></i> Clear Filters
             </button>
+          </div>
         </div>
+      </div>
 
-        <!-- Filter Section -->
-        <div class="filter-section" id="filterSection">
-            <div class="filter-row">
-                <div class="form-group">
-                    <label><i class="fas fa-search"></i> Search</label>
-                    <input type="text" class="form-control" id="searchInput" placeholder="Search by company or role...">
-                </div>
-                <div class="form-group">
-                    <label><i class="fas fa-briefcase"></i> Type</label>
-                    <select class="form-select" id="typeFilter">
-                        <option value="">All</option>
-                        <option value="job">Job</option>
-                        <option value="internship">Internship</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label><i class="fas fa-laptop-house"></i> Work Mode</label>
-                    <select class="form-select" id="modeFilter">
-                        <option value="">All</option>
-                        <option value="remote">Remote</option>
-                        <option value="onsite">On-site</option>
-                        <option value="hybrid">Hybrid</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label><i class="fas fa-file-contract"></i> PPO</label>
-                    <select class="form-select" id="ppoFilter">
-                        <option value="">All</option>
-                        <option value="yes">Yes</option>
-                        <option value="no">No</option>
-                    </select>
-                </div>
-            </div>
-            <div class="filter-row">
-                <div class="form-group">
-                    <label><i class="fas fa-calendar-day"></i> From Date</label>
-                    <input type="date" class="form-control" id="fromDate">
-                </div>
-                <div class="form-group">
-                    <label><i class="fas fa-calendar-day"></i> To Date</label>
-                    <input type="date" class="form-control" id="toDate">
-                </div>
-                <div class="form-group">
-                    <label>&nbsp;</label>
-                    <button class="clear-filters-btn" onclick="clearFilters()">
-                        <i class="fas fa-broom"></i> Clear Filters
-                    </button>
-                </div>
-            </div>
+      <!-- Job Listings -->
+      <div class="job-listings" id="jobListings">
+        <div class="no-opportunities">
+          <h3>No opportunities available</h3>
+          <p>Be the first to add an opportunity!</p>
         </div>
-
-        <!-- Job Listings -->
-        <div class="job-listings" id="jobListings">
-            <div class="no-opportunities">
-                <h3>No opportunities available</h3>
-                <p>Be the first to add an opportunity!</p>
-            </div>
-        </div>
+      </div>
     </div>
 
     <!-- Add/Edit Opportunity Modal -->
     <div class="modal" id="opportunityModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalTitle">Add New Opportunity</h5>
-                <button type="button" class="btn-close" onclick="closeModal()">&times;</button>
-            </div>
-            <div class="modal-body">
-                <form id="opportunityForm">
-                    <input type="hidden" id="opportunityId">
-                    <div class="row">
-                        <div class="form-group">
-                            <label><i class="fas fa-building"></i> Company Name *</label>
-                            <input type="text" class="form-control" id="companyName" required>
-                        </div>
-                        <div class="form-group">
-                            <label><i class="fas fa-user-tie"></i> Role *</label>
-                            <input type="text" class="form-control" id="role" required>
-                        </div>
-                    </div>
-                    
-                    <div class="row">
-                        <div class="form-group">
-                            <label><i class="fas fa-tag"></i> Type *</label>
-                            <select class="form-select" id="jobType" required>
-                                <option value="">Select Type</option>
-                                <option value="job">Job</option>
-                                <option value="internship">Internship</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label><i class="fas fa-laptop-house"></i> Work Mode *</label>
-                            <select class="form-select" id="workMode" required>
-                                <option value="">Select Mode</option>
-                                <option value="remote">Remote</option>
-                                <option value="onsite">On-site</option>
-                                <option value="hybrid">Hybrid</option>
-                            </select>
-                        </div>
-                    </div>
-                    
-                    <div class="row">
-                        <div class="form-group">
-                            <label><i class="fas fa-map-marker-alt"></i> Location *</label>
-                            <input type="text" class="form-control" id="location" required>
-                        </div>
-                        <div class="form-group">
-                            <label><i class="fas fa-money-bill-wave"></i> Stipend/Salary</label>
-                            <input type="text" class="form-control" id="stipend" placeholder="e.g., ₹50,000/month">
-                        </div>
-                    </div>
-                    
-                    <div class="row">
-                        <div class="form-group">
-                            <label><i class="fas fa-file-contract"></i> PPO Available? *</label>
-                            <select class="form-select" id="ppo" required>
-                                <option value="">Select</option>
-                                <option value="yes">Yes</option>
-                                <option value="no">No</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label><i class="fas fa-link"></i> Application Link *</label>
-                            <input type="url" class="form-control" id="applyLink" required placeholder="https://...">
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label><i class="fas fa-align-left"></i> Description (Optional)</label>
-                        <textarea class="form-control" id="description" rows="3" placeholder="Additional details about the opportunity..."></textarea>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-primary" onclick="closeModal()">
-                    <i class="fas fa-times"></i> Cancel
-                </button>
-                <button type="button" class="btn btn-primary" id="modalActionBtn" onclick="saveOpportunity()">
-                    <i class="fas fa-plus"></i> Add Opportunity
-                </button>
-                <button type="button" class="btn btn-danger" id="deleteBtn" style="display:none;" onclick="deleteOpportunity()">
-                    <i class="fas fa-trash"></i> Delete
-                </button>
-            </div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalTitle">Add New Opportunity</h5>
+          <button type="button" class="btn-close" onclick="closeModal()">
+            &times;
+          </button>
         </div>
+        <div class="modal-body">
+          <form id="opportunityForm">
+            <input type="hidden" id="opportunityId" />
+            <div class="row">
+              <div class="form-group">
+                <label><i class="fas fa-building"></i> Company Name *</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="companyName"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label><i class="fas fa-user-tie"></i> Role *</label>
+                <input type="text" class="form-control" id="role" required />
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="form-group">
+                <label><i class="fas fa-tag"></i> Type *</label>
+                <select class="form-select" id="jobType" required>
+                  <option value="">Select Type</option>
+                  <option value="job">Job</option>
+                  <option value="internship">Internship</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label><i class="fas fa-laptop-house"></i> Work Mode *</label>
+                <select class="form-select" id="workMode" required>
+                  <option value="">Select Mode</option>
+                  <option value="remote">Remote</option>
+                  <option value="onsite">On-site</option>
+                  <option value="hybrid">Hybrid</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="form-group">
+                <label><i class="fas fa-map-marker-alt"></i> Location *</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="location"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label
+                  ><i class="fas fa-money-bill-wave"></i> Stipend/Salary</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="stipend"
+                  placeholder="e.g., ₹50,000/month"
+                />
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="form-group">
+                <label
+                  ><i class="fas fa-file-contract"></i> PPO Available? *</label
+                >
+                <select class="form-select" id="ppo" required>
+                  <option value="">Select</option>
+                  <option value="yes">Yes</option>
+                  <option value="no">No</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label><i class="fas fa-link"></i> Application Link *</label>
+                <input
+                  type="url"
+                  class="form-control"
+                  id="applyLink"
+                  required
+                  placeholder="https://..."
+                />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label
+                ><i class="fas fa-align-left"></i> Description (Optional)</label
+              >
+              <textarea
+                class="form-control"
+                id="description"
+                rows="3"
+                placeholder="Additional details about the opportunity..."
+              ></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-outline-primary"
+            onclick="closeModal()"
+          >
+            <i class="fas fa-times"></i> Cancel
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary"
+            id="modalActionBtn"
+            onclick="saveOpportunity()"
+          >
+            <i class="fas fa-plus"></i> Add Opportunity
+          </button>
+          <button
+            type="button"
+            class="btn btn-danger"
+            id="deleteBtn"
+            style="display: none"
+            onclick="deleteOpportunity()"
+          >
+            <i class="fas fa-trash"></i> Delete
+          </button>
+        </div>
+      </div>
     </div>
 
     <script>
-    // Enhanced App Initialization
-    let currentUser = "{{user.username}}";
-    let opportunities = [];
-    let filteredOpportunities = [];
-    let isEditMode = false;
-    let currentEditId = null;
-    let searchTimeout = null;
+      // Enhanced App Initialization
+      let currentUser = "{{user.username}}";
+      let opportunities = [];
+      let filteredOpportunities = [];
+      let isEditMode = false;
+      let currentEditId = null;
+      let searchTimeout = null;
 
-    // Initialize the app
-    function initApp() {
-        document.getElementById('usernameDisplay').textContent = currentUser;
+      // Initialize the app
+      function initApp() {
+        document.getElementById("usernameDisplay").textContent = currentUser;
         loadOpportunities();
         setupEventListeners();
         renderOpportunities();
         updateStats();
         checkThemePreference();
-        
+
         // Initialize PPO field visibility
-        document.getElementById('jobType').addEventListener('change', togglePPOField);
-    }
+        document
+          .getElementById("jobType")
+          .addEventListener("change", togglePPOField);
+      }
 
-    // Toggle PPO field based on job type
-    function togglePPOField() {
-        const jobType = document.getElementById('jobType').value;
-        const ppoField = document.getElementById('ppo').closest('.form-group');
-        
-        if (jobType === 'internship') {
-            ppoField.style.display = 'block';
-            document.getElementById('ppo').required = true;
+      // Toggle PPO field based on job type
+      function togglePPOField() {
+        const jobType = document.getElementById("jobType").value;
+        const ppoField = document.getElementById("ppo").closest(".form-group");
+
+        if (jobType === "internship") {
+          ppoField.style.display = "block";
+          document.getElementById("ppo").required = true;
         } else {
-            ppoField.style.display = 'none';
-            document.getElementById('ppo').required = false;
-            document.getElementById('ppo').value = '';
+          ppoField.style.display = "none";
+          document.getElementById("ppo").required = false;
+          document.getElementById("ppo").value = "";
         }
-    }
+      }
 
-    // Enhanced Event Listeners
-    function setupEventListeners() {
+      // Enhanced Event Listeners
+      function setupEventListeners() {
         // Debounced search
-        document.getElementById('searchInput').addEventListener('input', function() {
+        document
+          .getElementById("searchInput")
+          .addEventListener("input", function () {
             clearTimeout(searchTimeout);
             searchTimeout = setTimeout(applyFilters, 300);
-        });
-        
+          });
+
         // Other filter event listeners
-        document.getElementById('typeFilter').addEventListener('change', applyFilters);
-        document.getElementById('modeFilter').addEventListener('change', applyFilters);
-        document.getElementById('ppoFilter').addEventListener('change', applyFilters);
-        document.getElementById('fromDate').addEventListener('change', applyFilters);
-        document.getElementById('toDate').addEventListener('change', applyFilters);
+        document
+          .getElementById("typeFilter")
+          .addEventListener("change", applyFilters);
+        document
+          .getElementById("modeFilter")
+          .addEventListener("change", applyFilters);
+        document
+          .getElementById("ppoFilter")
+          .addEventListener("change", applyFilters);
+        document
+          .getElementById("fromDate")
+          .addEventListener("change", applyFilters);
+        document
+          .getElementById("toDate")
+          .addEventListener("change", applyFilters);
 
         // Close modals/dropdowns when clicking outside
-        document.addEventListener('click', function(event) {
-            if (!event.target.closest('.dropdown')) {
-                document.getElementById('userDropdown').classList.remove('show');
-            }
-            if (event.target.classList.contains('modal')) {
-                closeModal();
-            }
+        document.addEventListener("click", function (event) {
+          if (!event.target.closest(".dropdown")) {
+            document.getElementById("userDropdown").classList.remove("show");
+          }
+          if (event.target.classList.contains("modal")) {
+            closeModal();
+          }
         });
-    }
+      }
 
-    // Opportunity Management
-    function loadOpportunities() {
-        const stored = localStorage.getItem('internstellar_opportunities');
+      // Opportunity Management
+      function loadOpportunities() {
+        const stored = localStorage.getItem("internstellar_opportunities");
         if (stored) {
-            opportunities = JSON.parse(stored);
+          opportunities = JSON.parse(stored);
         } else {
-            // Add some sample data
-            opportunities = [
-               
-                
-            ];
-            saveOpportunities();
+          // Add some sample data
+          opportunities = [];
+          saveOpportunities();
         }
         filteredOpportunities = [...opportunities];
-    }
+      }
 
-    function saveOpportunities() {
-        localStorage.setItem('internstellar_opportunities', JSON.stringify(opportunities));
-    }
+      function saveOpportunities() {
+        localStorage.setItem(
+          "internstellar_opportunities",
+          JSON.stringify(opportunities)
+        );
+      }
 
-    // Modal Functions
-    function openAddModal() {
+      // Modal Functions
+      function openAddModal() {
         isEditMode = false;
         currentEditId = null;
-        document.getElementById('modalTitle').textContent = 'Add New Opportunity';
-        document.getElementById('modalActionBtn').innerHTML = '<i class="fas fa-plus"></i> Add Opportunity';
-        document.getElementById('deleteBtn').style.display = 'none';
-        document.getElementById('opportunityForm').reset();
-        
+        document.getElementById("modalTitle").textContent =
+          "Add New Opportunity";
+        document.getElementById("modalActionBtn").innerHTML =
+          '<i class="fas fa-plus"></i> Add Opportunity';
+        document.getElementById("deleteBtn").style.display = "none";
+        document.getElementById("opportunityForm").reset();
+
         // Initialize PPO field visibility
         togglePPOField();
-        
-        document.getElementById('opportunityModal').classList.add('show');
-    }
 
-    function openEditModal(id) {
-        const opportunity = opportunities.find(op => op.id === id);
+        document.getElementById("opportunityModal").classList.add("show");
+      }
+
+      function openEditModal(id) {
+        const opportunity = opportunities.find((op) => op.id === id);
         if (!opportunity) return;
 
         isEditMode = true;
         currentEditId = id;
-        document.getElementById('modalTitle').textContent = 'Edit Opportunity';
-        document.getElementById('modalActionBtn').innerHTML = '<i class="fas fa-save"></i> Save Changes';
-        document.getElementById('deleteBtn').style.display = 'block';
-        
+        document.getElementById("modalTitle").textContent = "Edit Opportunity";
+        document.getElementById("modalActionBtn").innerHTML =
+          '<i class="fas fa-save"></i> Save Changes';
+        document.getElementById("deleteBtn").style.display = "block";
+
         // Populate form
-        document.getElementById('opportunityId').value = opportunity.id;
-        document.getElementById('companyName').value = opportunity.company;
-        document.getElementById('role').value = opportunity.role;
-        document.getElementById('jobType').value = opportunity.type;
-        document.getElementById('workMode').value = opportunity.workMode;
-        document.getElementById('location').value = opportunity.location;
-        document.getElementById('stipend').value = opportunity.stipend || '';
-        document.getElementById('ppo').value = opportunity.ppo;
-        document.getElementById('applyLink').value = opportunity.applyLink;
-        document.getElementById('description').value = opportunity.description || '';
-        
+        document.getElementById("opportunityId").value = opportunity.id;
+        document.getElementById("companyName").value = opportunity.company;
+        document.getElementById("role").value = opportunity.role;
+        document.getElementById("jobType").value = opportunity.type;
+        document.getElementById("workMode").value = opportunity.workMode;
+        document.getElementById("location").value = opportunity.location;
+        document.getElementById("stipend").value = opportunity.stipend || "";
+        document.getElementById("ppo").value = opportunity.ppo;
+        document.getElementById("applyLink").value = opportunity.applyLink;
+        document.getElementById("description").value =
+          opportunity.description || "";
+
         // Set PPO field visibility
         togglePPOField();
-        
-        document.getElementById('opportunityModal').classList.add('show');
-    }
 
-    function saveOpportunity() {
-        const form = document.getElementById('opportunityForm');
-        const jobType = document.getElementById('jobType').value;
-        let requiredFields = ['companyName', 'role', 'jobType', 'workMode', 'location', 'applyLink'];
-        
+        document.getElementById("opportunityModal").classList.add("show");
+      }
+
+      function saveOpportunity() {
+        const form = document.getElementById("opportunityForm");
+        const jobType = document.getElementById("jobType").value;
+        let requiredFields = [
+          "companyName",
+          "role",
+          "jobType",
+          "workMode",
+          "location",
+          "applyLink",
+        ];
+
         // Only require PPO for internships
-        if (jobType === 'internship') {
-            requiredFields.push('ppo');
+        if (jobType === "internship") {
+          requiredFields.push("ppo");
         }
-        
+
         let isValid = true;
 
         // Validate form
-        requiredFields.forEach(field => {
-            const element = document.getElementById(field);
-            if (!element.value.trim()) {
-                element.style.borderColor = 'red';
-                isValid = false;
-            } else {
-                element.style.borderColor = '';
-            }
+        requiredFields.forEach((field) => {
+          const element = document.getElementById(field);
+          if (!element.value.trim()) {
+            element.style.borderColor = "red";
+            isValid = false;
+          } else {
+            element.style.borderColor = "";
+          }
         });
 
         if (!isValid) {
-            showToast('Please fill in all required fields', 'error');
-            return;
+          showToast("Please fill in all required fields", "error");
+          return;
         }
 
         const opportunityData = {
-            id: isEditMode ? currentEditId : Date.now(),
-            company: document.getElementById('companyName').value.trim(),
-            role: document.getElementById('role').value.trim(),
-            type: jobType,
-            workMode: document.getElementById('workMode').value,
-            location: document.getElementById('location').value.trim(),
-            stipend: document.getElementById('stipend').value.trim(),
-            ppo: jobType === 'internship' ? document.getElementById('ppo').value : 'no',
-            applyLink: document.getElementById('applyLink').value.trim(),
-            description: document.getElementById('description').value.trim(),
-            postedBy: currentUser,
-            datePosted: isEditMode ? opportunities.find(op => op.id === currentEditId).datePosted : new Date().toISOString()
+          id: isEditMode ? currentEditId : Date.now(),
+          company: document.getElementById("companyName").value.trim(),
+          role: document.getElementById("role").value.trim(),
+          type: jobType,
+          workMode: document.getElementById("workMode").value,
+          location: document.getElementById("location").value.trim(),
+          stipend: document.getElementById("stipend").value.trim(),
+          ppo:
+            jobType === "internship"
+              ? document.getElementById("ppo").value
+              : "no",
+          applyLink: document.getElementById("applyLink").value.trim(),
+          description: document.getElementById("description").value.trim(),
+          postedBy: currentUser,
+          datePosted: isEditMode
+            ? opportunities.find((op) => op.id === currentEditId).datePosted
+            : new Date().toISOString(),
         };
 
         if (isEditMode) {
-            // Update existing opportunity
-            const index = opportunities.findIndex(op => op.id === currentEditId);
-            if (index !== -1) {
-                opportunities[index] = opportunityData;
-                showToast('Opportunity updated successfully!', 'success');
-            }
+          // Update existing opportunity
+          const index = opportunities.findIndex(
+            (op) => op.id === currentEditId
+          );
+          if (index !== -1) {
+            opportunities[index] = opportunityData;
+            showToast("Opportunity updated successfully!", "success");
+          }
         } else {
-            // Add new opportunity
-            opportunities.unshift(opportunityData);
-            showToast('Opportunity added successfully!', 'success');
+          // Add new opportunity
+          opportunities.unshift(opportunityData);
+          showToast("Opportunity added successfully!", "success");
         }
 
         saveOpportunities();
@@ -1421,66 +1464,77 @@ body.light-theme {
         renderOpportunities();
         updateStats();
         closeModal();
-    }
+      }
 
-    
-
-        function deleteOpportunity() {
-            if (confirm('Are you sure you want to delete this opportunity?')) {
-                opportunities = opportunities.filter(op => op.id !== currentEditId);
-                saveOpportunities();
-                filteredOpportunities = filteredOpportunities.filter(op => op.id !== currentEditId);
-                renderOpportunities();
-                updateStats();
-                showToast('Opportunity deleted successfully!', 'success');
-                closeModal();
-            }
+      function deleteOpportunity() {
+        if (confirm("Are you sure you want to delete this opportunity?")) {
+          opportunities = opportunities.filter((op) => op.id !== currentEditId);
+          saveOpportunities();
+          filteredOpportunities = filteredOpportunities.filter(
+            (op) => op.id !== currentEditId
+          );
+          renderOpportunities();
+          updateStats();
+          showToast("Opportunity deleted successfully!", "success");
+          closeModal();
         }
+      }
 
-        function closeModal() {
-            document.getElementById('opportunityModal').classList.remove('show');
-        }
+      function closeModal() {
+        document.getElementById("opportunityModal").classList.remove("show");
+      }
 
-        // Rendering Functions
-        function renderOpportunities() {
-            const container = document.getElementById('jobListings');
-            
-            if (filteredOpportunities.length === 0) {
-                container.innerHTML = `
+      // Rendering Functions
+      function renderOpportunities() {
+        const container = document.getElementById("jobListings");
+
+        if (filteredOpportunities.length === 0) {
+          container.innerHTML = `
                     <div class="no-opportunities">
                         <h3>No opportunities found</h3>
                         <p>Try adjusting your filters or add a new opportunity!</p>
                     </div>
                 `;
-                return;
-            }
+          return;
+        }
 
-            container.innerHTML = filteredOpportunities
-                .sort((a, b) => new Date(b.datePosted) - new Date(a.datePosted))
-                .map(job => `
+        container.innerHTML = filteredOpportunities
+          .sort((a, b) => new Date(b.datePosted) - new Date(a.datePosted))
+          .map(
+            (job) => `
                 <div class="job-card">
                     <div class="job-header">
                         <div>
                             <div class="job-title">${job.role}</div>
                             <div class="company-name">${job.company}</div>
                         </div>
-                        ${job.postedBy === currentUser ? `
+                        ${
+                          job.postedBy === currentUser
+                            ? `
                         <div class="job-actions">
                             <button class="edit-btn" onclick="openEditModal(${job.id})" title="Edit">
                                 <i class="fas fa-edit"></i>
                             </button>
                         </div>
-                        ` : ''}
+                        `
+                            : ""
+                        }
                     </div>
                     
                     <div class="job-details">
                         <div class="job-detail">
-                            <i class="fas fa-map-marker-alt"></i> ${job.location}
+                            <i class="fas fa-map-marker-alt"></i> ${
+                              job.location
+                            }
                         </div>
                         <div class="job-detail">
                             <i class="fas fa-laptop-house"></i> ${job.workMode}
                         </div>
-                        ${job.stipend ? `<div class="job-detail"><i class="fas fa-money-bill-wave"></i> ${job.stipend}</div>` : ''}
+                        ${
+                          job.stipend
+                            ? `<div class="job-detail"><i class="fas fa-money-bill-wave"></i> ${job.stipend}</div>`
+                            : ""
+                        }
                     </div>
                     
                     <div class="job-tags">
@@ -1488,142 +1542,173 @@ body.light-theme {
                         <span class="job-tag">PPO: ${job.ppo}</span>
                     </div>
                     
-                    ${job.description ? `<div class="job-description">${job.description}</div>` : ''}
+                    ${
+                      job.description
+                        ? `<div class="job-description">${job.description}</div>`
+                        : ""
+                    }
                     
                     <div class="job-footer">
                         <div class="job-meta">
-                            <i class="fas fa-user"></i> Posted by ${job.postedBy} • <i class="fas fa-clock"></i> ${formatDate(job.datePosted)}
+                            <i class="fas fa-user"></i> Posted by <strong> ${
+                              job.postedBy
+                            } </strong>• <i class="fas fa-clock"></i> ${formatDate(
+              job.datePosted
+            )}
                         </div>
-                        <a href="${job.applyLink}" target="_blank" class="apply-btn">
+                        <a href="${
+                          job.applyLink
+                        }" target="_blank" class="apply-btn">
                             <i class="fas fa-external-link-alt"></i> Apply Now
                         </a>
                     </div>
                 </div>
-            `).join('');
+            `
+          )
+          .join("");
+      }
+
+      function updateStats() {
+        const totalJobs = opportunities.filter(
+          (op) => op.type === "job"
+        ).length;
+        const totalInternships = opportunities.filter(
+          (op) => op.type === "internship"
+        ).length;
+        const remoteJobs = opportunities.filter(
+          (op) => op.workMode === "remote"
+        ).length;
+        const ppoJobs = opportunities.filter((op) => op.ppo === "yes").length;
+
+        document.getElementById("totalJobs").textContent = totalJobs;
+        document.getElementById("totalInternships").textContent =
+          totalInternships;
+        document.getElementById("remoteJobs").textContent = remoteJobs;
+        document.getElementById("ppoJobs").textContent = ppoJobs;
+      }
+
+      // Filter Functions
+      function applyFilters() {
+        const search = document
+          .getElementById("searchInput")
+          .value.toLowerCase();
+        const type = document.getElementById("typeFilter").value;
+        const mode = document.getElementById("modeFilter").value;
+        const ppo = document.getElementById("ppoFilter").value;
+        const fromDate = document.getElementById("fromDate").value;
+        const toDate = document.getElementById("toDate").value;
+
+        filteredOpportunities = opportunities.filter((job) => {
+          const matchSearch =
+            !search ||
+            job.company.toLowerCase().includes(search) ||
+            job.role.toLowerCase().includes(search);
+
+          const matchType = !type || job.type === type;
+          const matchMode = !mode || job.workMode === mode;
+          const matchPpo = !ppo || job.ppo === ppo;
+
+          const jobDate = new Date(job.datePosted);
+          const matchFromDate = !fromDate || jobDate >= new Date(fromDate);
+          const matchToDate = !toDate || jobDate <= new Date(toDate);
+
+          return (
+            matchSearch &&
+            matchType &&
+            matchMode &&
+            matchPpo &&
+            matchFromDate &&
+            matchToDate
+          );
+        });
+
+        renderOpportunities();
+      }
+
+      function clearFilters() {
+        document.getElementById("searchInput").value = "";
+        document.getElementById("typeFilter").value = "";
+        document.getElementById("modeFilter").value = "";
+        document.getElementById("ppoFilter").value = "";
+        document.getElementById("fromDate").value = "";
+        document.getElementById("toDate").value = "";
+
+        filteredOpportunities = [...opportunities];
+        renderOpportunities();
+        showToast("Filters cleared", "success");
+      }
+
+      function toggleFilters() {
+        const filterSection = document.getElementById("filterSection");
+        filterSection.classList.toggle("show");
+      }
+
+      // UI Helpers
+      function toggleDropdown() {
+        document.getElementById("userDropdown").classList.toggle("show");
+      }
+
+      function showMyOpportunities() {
+        filteredOpportunities = opportunities.filter(
+          (op) => op.postedBy === currentUser
+        );
+        renderOpportunities();
+        document.getElementById("userDropdown").classList.remove("show");
+        showToast("Showing only your posted opportunities", "success");
+      }
+
+      function logout() {
+        if (confirm("Are you sure you want to logout?")) {
+          window.location.href = "/logout/";
         }
+      }
 
-        function updateStats() {
-            const totalJobs = opportunities.filter(op => op.type === 'job').length;
-            const totalInternships = opportunities.filter(op => op.type === 'internship').length;
-            const remoteJobs = opportunities.filter(op => op.workMode === 'remote').length;
-            const ppoJobs = opportunities.filter(op => op.ppo === 'yes').length;
+      function formatDate(dateString) {
+        const date = new Date(dateString);
+        const now = new Date();
+        const diffTime = Math.abs(now - date);
+        const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
 
-            document.getElementById('totalJobs').textContent = totalJobs;
-            document.getElementById('totalInternships').textContent = totalInternships;
-            document.getElementById('remoteJobs').textContent = remoteJobs;
-            document.getElementById('ppoJobs').textContent = ppoJobs;
+        if (diffDays === 0) return "Today";
+        if (diffDays === 1) return "Yesterday";
+        if (diffDays < 7) return `${diffDays} days ago`;
+        return date.toLocaleDateString();
+      }
+
+      // Theme Management
+      function toggleTheme() {
+        document.body.classList.toggle("light-theme");
+        const isLight = document.body.classList.contains("light-theme");
+        localStorage.setItem("theme", isLight ? "light" : "dark");
+        updateThemeIcon(isLight);
+      }
+
+      function checkThemePreference() {
+        const savedTheme = localStorage.getItem("theme") || "dark";
+        if (savedTheme === "light") {
+          document.body.classList.add("light-theme");
         }
+        updateThemeIcon(savedTheme === "light");
+      }
 
-        // Filter Functions
-        function applyFilters() {
-            const search = document.getElementById('searchInput').value.toLowerCase();
-            const type = document.getElementById('typeFilter').value;
-            const mode = document.getElementById('modeFilter').value;
-            const ppo = document.getElementById('ppoFilter').value;
-            const fromDate = document.getElementById('fromDate').value;
-            const toDate = document.getElementById('toDate').value;
+      function updateThemeIcon(isLight) {
+        const icon = document.querySelector(".theme-toggle i");
+        icon.className = isLight ? "fas fa-sun" : "fas fa-moon";
+      }
 
-            filteredOpportunities = opportunities.filter(job => {
-                const matchSearch = !search || 
-                    job.company.toLowerCase().includes(search) || 
-                    job.role.toLowerCase().includes(search);
-                
-                const matchType = !type || job.type === type;
-                const matchMode = !mode || job.workMode === mode;
-                const matchPpo = !ppo || job.ppo === ppo;
-                
-                const jobDate = new Date(job.datePosted);
-                const matchFromDate = !fromDate || jobDate >= new Date(fromDate);
-                const matchToDate = !toDate || jobDate <= new Date(toDate);
+      // Toast Notification System
+      function showToast(message, type = "success") {
+        const toast = document.getElementById("toast");
+        toast.textContent = message;
+        toast.className = `toast show ${type}`;
 
-                return matchSearch && matchType && matchMode && matchPpo && matchFromDate && matchToDate;
-            });
+        setTimeout(() => {
+          toast.classList.remove("show");
+        }, 3000);
+      }
 
-            renderOpportunities();
-        }
-
-        function clearFilters() {
-            document.getElementById('searchInput').value = '';
-            document.getElementById('typeFilter').value = '';
-            document.getElementById('modeFilter').value = '';
-            document.getElementById('ppoFilter').value = '';
-            document.getElementById('fromDate').value = '';
-            document.getElementById('toDate').value = '';
-            
-            filteredOpportunities = [...opportunities];
-            renderOpportunities();
-            showToast('Filters cleared', 'success');
-        }
-
-        function toggleFilters() {
-            const filterSection = document.getElementById('filterSection');
-            filterSection.classList.toggle('show');
-        }
-
-        // UI Helpers
-        function toggleDropdown() {
-            document.getElementById('userDropdown').classList.toggle('show');
-        }
-
-        function showMyOpportunities() {
-            filteredOpportunities = opportunities.filter(op => op.postedBy === currentUser);
-            renderOpportunities();
-            document.getElementById('userDropdown').classList.remove('show');
-            showToast('Showing only your posted opportunities', 'success');
-        }
-
-        function logout() {
-            if (confirm('Are you sure you want to logout?')) {
-                window.location.href = '/logout/';
-            }
-        }
-
-        function formatDate(dateString) {
-            const date = new Date(dateString);
-            const now = new Date();
-            const diffTime = Math.abs(now - date);
-            const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-            
-            if (diffDays === 0) return 'Today';
-            if (diffDays === 1) return 'Yesterday';
-            if (diffDays < 7) return `${diffDays} days ago`;
-            return date.toLocaleDateString();
-        }
-
-        // Theme Management
-        function toggleTheme() {
-            document.body.classList.toggle('light-theme');
-            const isLight = document.body.classList.contains('light-theme');
-            localStorage.setItem('theme', isLight ? 'light' : 'dark');
-            updateThemeIcon(isLight);
-        }
-
-        function checkThemePreference() {
-            const savedTheme = localStorage.getItem('theme') || 'dark';
-            if (savedTheme === 'light') {
-                document.body.classList.add('light-theme');
-            }
-            updateThemeIcon(savedTheme === 'light');
-        }
-
-        function updateThemeIcon(isLight) {
-            const icon = document.querySelector('.theme-toggle i');
-            icon.className = isLight ? 'fas fa-sun' : 'fas fa-moon';
-        }
-
-        // Toast Notification System
-        function showToast(message, type = 'success') {
-            const toast = document.getElementById('toast');
-            toast.textContent = message;
-            toast.className = `toast show ${type}`;
-            
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 3000);
-        }
-
-        // Initialize the app when page loads
-        document.addEventListener('DOMContentLoaded', initApp);
+      // Initialize the app when page loads
+      document.addEventListener("DOMContentLoaded", initApp);
     </script>
-</body>
+  </body>
 </html>

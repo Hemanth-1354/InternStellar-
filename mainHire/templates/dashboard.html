@@ -124,6 +124,8 @@
 
       .dropdown {
         position: relative;
+        z-index:1000;
+        display: inline-block;
       }
 
        h1, h2, h3, h4, h5, h6 {
@@ -142,6 +144,7 @@
         gap: 8px;
         color: #ffffff;
         transition: all 0.3s ease;
+        z-index:100;
       }
 
       .dropdown-toggle:hover {
@@ -159,7 +162,8 @@
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
         min-width: 200px;
         display: none;
-        z-index: 1000;
+        z-index: 1050;
+        margin-top:5px;
         animation: fadeInDown 0.3s ease-out;
       }
 
@@ -199,10 +203,11 @@
       }
 
       .stats-section {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-        gap: 15px;
+        display: flex;
+        gap: 30px;
         margin: 20px 0;
+        flex-wrap: wrap;
+        justify-content: center;
       }
 
       .stat-card {
@@ -210,10 +215,12 @@
         border: 1px solid #333333;
         border-left: 4px solid #ffffff;
         border-radius: 8px;
-        padding: 15px;
+        padding: 20px;
         text-align: center;
         transition: all 0.3s ease;
         animation: fadeInUp 0.6s ease-out 0.1s both;
+        width: 200px;
+        max-width: 100%;
       }
 
       .stat-card:hover {
@@ -242,6 +249,8 @@
       .opportunities-header {
         display: flex;
         justify-content: space-between;
+        flex-wrap:wrap;
+        gap:15px;
         align-items: center;
         margin: 30px 0 20px 0;
         animation: slideInLeft 0.7s ease-out 0.2s both;
@@ -858,7 +867,7 @@
         border-radius: 4px;
         padding: 16px;
         position: fixed;
-        z-index: 1100;
+        z-index: 9999;
         left: 50%;
         bottom: 30px;
         font-size: 14px;
@@ -915,6 +924,40 @@
         color: #999;
       }
 
+      #searchInput {
+  background-color: #222222;
+  border: 1px solid #333333;
+  color: #ffffff;
+  padding: 8px 12px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  width:100%;
+}
+
+.light-theme #searchInput {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  color: #000000;
+}
+
+@media (max-width: 768px) {
+  .opportunities-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap:10px;
+  }
+  
+  .opportunities-header > div {
+    width: 100%;
+  }
+  
+  #searchInput {
+    width: 100%;
+  }
+}
+
+
+
       /* Theme Toggle */
       .theme-toggle {
         background: none;
@@ -968,10 +1011,6 @@
       }
 
       @media (max-width: 480px) {
-        .stats-section {
-          grid-template-columns: 1fr;
-        }
-
         .navbar-brand {
           font-size: 1.4rem;
         }
@@ -981,6 +1020,19 @@
           font-size: 0.9rem;
         }
       }
+
+      @media (max-width: 600px) {
+  .stats-section {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  .stat-card {
+    width: 100%;
+    max-width: 250px;
+  }
+}
     </style>
   </head>
   <body>
@@ -997,20 +1049,23 @@
           <button class="add-opportunity-btn" onclick="openAddModal()">
             <strong>+ Add New Opportunity</strong>
           </button>
+
+
+
           <div class="dropdown">
-            <button class="dropdown-toggle" onclick="toggleDropdown()">
-              <strong id="usernameDisplay">{{user.username}}</strong>
-              <span>▼</span>
-            </button>
-            <div class="dropdown-menu" id="userDropdown">
-              <a href="#" class="dropdown-item" onclick="showMyOpportunities()">
-                <i class="fas fa-briefcase"></i> My Posted Opportunities
-              </a>
-              <a href="#" class="dropdown-item" onclick="logout()">
-                <i class="fas fa-sign-out-alt"></i> Logout
-              </a>
-            </div>
-          </div>
+  <button class="dropdown-toggle" onclick="toggleDropdown(event)">
+    <strong id="usernameDisplay">{{user.username}}</strong>
+    <span>▼</span>
+  </button>
+  <div class="dropdown-menu" id="userDropdown">
+    <a href="#" class="dropdown-item" onclick="showMyOpportunities()">
+      <i class="fas fa-briefcase"></i> My Posted Opportunities
+    </a>
+    <a href="{% url 'login' %}" class="dropdown-item" >
+      <i class="fas fa-sign-out-alt"></i> Logout
+    </a>
+  </div>
+</div>
         </div>
       </div>
     </nav>
@@ -1026,79 +1081,78 @@
           <h5>Internships</h5>
           <p id="totalInternships">0</p>
         </div>
-        <div class="stat-card">
-          <h5>Remote Jobs</h5>
-          <p id="remoteJobs">0</p>
-        </div>
-        <div class="stat-card">
-          <h5>With PPO</h5>
-          <p id="ppoJobs">0</p>
-        </div>
+        
       </div>
 
       <!-- Opportunities Header -->
       <div class="opportunities-header">
-        <h2>Latest Opportunities</h2>
-        <button class="filter-btn" onclick="toggleFilters()">
-          <i class="fas fa-filter"></i> Filters
-        </button>
-      </div>
+  <div style="display: flex; align-items: center; gap: 15px;">
+    <h2>Latest Opportunities</h2>
+    <div class="form-group" style="margin: 0; width: 300px;">
+      <input
+        type="text"
+        class="form-control"
+        id="searchInput"
+        placeholder="Search opportunities..."
+        style="margin: 0;"
+      />
+    </div>
+  </div>
+  <div style="display: flex; gap: 10px;">
+    <button class="filter-btn" onclick="toggleFilters()">
+      <i class="fas fa-filter"></i> Filters
+    </button>
+  </div>
+</div>
+
+
 
       <!-- Filter Section -->
       <div class="filter-section" id="filterSection">
-        <div class="filter-row">
-          <div class="form-group">
-            <label><i class="fas fa-search"></i> Search</label>
-            <input
-              type="text"
-              class="form-control"
-              id="searchInput"
-              placeholder="Search by company or role..."
-            />
-          </div>
-          <div class="form-group">
-            <label><i class="fas fa-briefcase"></i> Type</label>
-            <select class="form-select" id="typeFilter">
-              <option value="">All</option>
-              <option value="job">Job</option>
-              <option value="internship">Internship</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label><i class="fas fa-laptop-house"></i> Work Mode</label>
-            <select class="form-select" id="modeFilter">
-              <option value="">All</option>
-              <option value="remote">Remote</option>
-              <option value="onsite">On-site</option>
-              <option value="hybrid">Hybrid</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label><i class="fas fa-file-contract"></i> PPO</label>
-            <select class="form-select" id="ppoFilter">
-              <option value="">All</option>
-              <option value="yes">Yes</option>
-              <option value="no">No</option>
-            </select>
-          </div>
-        </div>
-        <div class="filter-row">
-          <div class="form-group">
-            <label><i class="fas fa-calendar-day"></i> From Date</label>
-            <input type="date" class="form-control" id="fromDate" />
-          </div>
-          <div class="form-group">
-            <label><i class="fas fa-calendar-day"></i> To Date</label>
-            <input type="date" class="form-control" id="toDate" />
-          </div>
-          <div class="form-group">
-            <label>&nbsp;</label>
-            <button class="clear-filters-btn" onclick="clearFilters()">
-              <i class="fas fa-broom"></i> Clear Filters
-            </button>
-          </div>
-        </div>
-      </div>
+  <div class="filter-row">
+    <div class="form-group">
+      <label><i class="fas fa-briefcase"></i> Type</label>
+      <select class="form-select" id="typeFilter">
+        <option value="">All</option>
+        <option value="job">Job</option>
+        <option value="internship">Internship</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label><i class="fas fa-laptop-house"></i> Work Mode</label>
+      <select class="form-select" id="modeFilter">
+        <option value="">All</option>
+        <option value="remote">Remote</option>
+        <option value="onsite">On-site</option>
+        <option value="hybrid">Hybrid</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label><i class="fas fa-file-contract"></i> PPO</label>
+      <select class="form-select" id="ppoFilter">
+        <option value="">All</option>
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+      </select>
+    </div>
+  </div>
+  <div class="filter-row">
+    <div class="form-group">
+      <label><i class="fas fa-calendar-day"></i> From Date</label>
+      <input type="date" class="form-control" id="fromDate" />
+    </div>
+    <div class="form-group">
+      <label><i class="fas fa-calendar-day"></i> To Date</label>
+      <input type="date" class="form-control" id="toDate" />
+    </div>
+    <div class="form-group">
+      <label>&nbsp;</label>
+      <button class="clear-filters-btn" onclick="clearFilters()">
+        <i class="fas fa-broom"></i> Clear Filters
+      </button>
+    </div>
+  </div>
+</div>
 
       <!-- Job Listings -->
       <div class="job-listings" id="jobListings">
@@ -1244,8 +1298,7 @@
         </div>
       </div>
     </div>
-
-    <script>
+<script>
       // Enhanced App Initialization
       let currentUser = "{{user.username}}";
       let opportunities = [];
@@ -1253,6 +1306,7 @@
       let isEditMode = false;
       let currentEditId = null;
       let searchTimeout = null;
+      let currentViewMode = 'all'; // 'all' or 'my'
 
       // Initialize the app
       function initApp() {
@@ -1311,11 +1365,16 @@
           .getElementById("toDate")
           .addEventListener("change", applyFilters);
 
-        // Close modals/dropdowns when clicking outside
-        document.addEventListener("click", function (event) {
-          if (!event.target.closest(".dropdown")) {
-            document.getElementById("userDropdown").classList.remove("show");
+        // Dropdown and modal handling
+        document.addEventListener('click', function(event) {
+          const dropdown = document.getElementById('userDropdown');
+          
+          // Close dropdown when clicking outside
+          if (!event.target.closest('.dropdown') && dropdown.classList.contains('show')) {
+            dropdown.classList.remove('show');
           }
+          
+          // Close modal when clicking on modal background
           if (event.target.classList.contains("modal")) {
             closeModal();
           }
@@ -1325,13 +1384,7 @@
       // Opportunity Management
       function loadOpportunities() {
         const stored = localStorage.getItem("internstellar_opportunities");
-        if (stored) {
-          opportunities = JSON.parse(stored);
-        } else {
-          // Add some sample data
-          opportunities = [];
-          saveOpportunities();
-        }
+        opportunities = stored ? JSON.parse(stored) : [];
         filteredOpportunities = [...opportunities];
       }
 
@@ -1342,20 +1395,99 @@
         );
       }
 
+      // View Management
+      function showMyOpportunities() {
+        currentViewMode = 'my';
+        applyFilters();
+        document.getElementById("userDropdown").classList.remove("show");
+        
+        // Add back button if not present
+        if (!document.getElementById("backButtonContainer")) {
+          const header = document.querySelector(".opportunities-header");
+          header.insertAdjacentHTML('beforeend', `
+            <div id="backButtonContainer" style="display: flex; gap: 10px;">
+              <button class="filter-btn" onclick="showAllOpportunities()">
+                <i class="fas fa-arrow-left"></i> All Opportunities
+              </button>
+            </div>
+          `);
+        }
+        showToast("Showing your posted opportunities", "success");
+      }
+
+      function showAllOpportunities() {
+        currentViewMode = 'all';
+        applyFilters();
+        const backBtn = document.getElementById("backButtonContainer");
+        if (backBtn) backBtn.remove();
+        showToast("Showing all opportunities", "success");
+      }
+
+      // Unified Filter and Search Function
+      function applyFilters() {
+        const searchTerm = document.getElementById("searchInput").value.toLowerCase();
+        const type = document.getElementById("typeFilter").value;
+        const mode = document.getElementById("modeFilter").value;
+        const ppo = document.getElementById("ppoFilter").value;
+        const fromDate = document.getElementById("fromDate").value;
+        const toDate = document.getElementById("toDate").value;
+
+        // Start with appropriate base list
+        const baseList = currentViewMode === 'my' 
+          ? opportunities.filter(op => op.postedBy === currentUser)
+          : [...opportunities];
+
+        filteredOpportunities = baseList.filter(job => {
+          const matchSearch = !searchTerm ||
+            job.company.toLowerCase().includes(searchTerm) ||
+            job.role.toLowerCase().includes(searchTerm);
+
+          const matchType = !type || job.type === type;
+          const matchMode = !mode || job.workMode === mode;
+          const matchPpo = !ppo || job.ppo === ppo;
+
+          const jobDate = new Date(job.datePosted);
+          const matchFromDate = !fromDate || jobDate >= new Date(fromDate);
+          const matchToDate = !toDate || jobDate <= new Date(toDate);
+
+          return matchSearch && matchType && matchMode && matchPpo && matchFromDate && matchToDate;
+        });
+
+        renderOpportunities();
+      }
+
+      function clearFilters() {
+        document.getElementById("searchInput").value = "";
+        document.getElementById("typeFilter").value = "";
+        document.getElementById("modeFilter").value = "";
+        document.getElementById("ppoFilter").value = "";
+        document.getElementById("fromDate").value = "";
+        document.getElementById("toDate").value = "";
+        applyFilters();
+        showToast("Filters cleared", "success");
+      }
+
+      function toggleFilters() {
+        const filterSection = document.getElementById("filterSection");
+        filterSection.classList.toggle("show");
+      }
+
+      // Dropdown Toggle
+      function toggleDropdown(event) {
+        event.stopPropagation();
+        const dropdown = document.getElementById('userDropdown');
+        dropdown.classList.toggle('show');
+      }
+
       // Modal Functions
       function openAddModal() {
         isEditMode = false;
         currentEditId = null;
-        document.getElementById("modalTitle").textContent =
-          "Add New Opportunity";
-        document.getElementById("modalActionBtn").innerHTML =
-          '<i class="fas fa-plus"></i> Add Opportunity';
+        document.getElementById("modalTitle").textContent = "Add New Opportunity";
+        document.getElementById("modalActionBtn").innerHTML = '<i class="fas fa-plus"></i> Add Opportunity';
         document.getElementById("deleteBtn").style.display = "none";
         document.getElementById("opportunityForm").reset();
-
-        // Initialize PPO field visibility
         togglePPOField();
-
         document.getElementById("opportunityModal").classList.add("show");
       }
 
@@ -1366,8 +1498,7 @@
         isEditMode = true;
         currentEditId = id;
         document.getElementById("modalTitle").textContent = "Edit Opportunity";
-        document.getElementById("modalActionBtn").innerHTML =
-          '<i class="fas fa-save"></i> Save Changes';
+        document.getElementById("modalActionBtn").innerHTML = '<i class="fas fa-save"></i> Save Changes';
         document.getElementById("deleteBtn").style.display = "block";
 
         // Populate form
@@ -1380,8 +1511,7 @@
         document.getElementById("stipend").value = opportunity.stipend || "";
         document.getElementById("ppo").value = opportunity.ppo;
         document.getElementById("applyLink").value = opportunity.applyLink;
-        document.getElementById("description").value =
-          opportunity.description || "";
+        document.getElementById("description").value = opportunity.description || "";
 
         // Set PPO field visibility
         togglePPOField();
@@ -1432,10 +1562,7 @@
           workMode: document.getElementById("workMode").value,
           location: document.getElementById("location").value.trim(),
           stipend: document.getElementById("stipend").value.trim(),
-          ppo:
-            jobType === "internship"
-              ? document.getElementById("ppo").value
-              : "no",
+          ppo: jobType === "internship" ? document.getElementById("ppo").value : "no",
           applyLink: document.getElementById("applyLink").value.trim(),
           description: document.getElementById("description").value.trim(),
           postedBy: currentUser,
@@ -1446,9 +1573,7 @@
 
         if (isEditMode) {
           // Update existing opportunity
-          const index = opportunities.findIndex(
-            (op) => op.id === currentEditId
-          );
+          const index = opportunities.findIndex((op) => op.id === currentEditId);
           if (index !== -1) {
             opportunities[index] = opportunityData;
             showToast("Opportunity updated successfully!", "success");
@@ -1490,177 +1615,66 @@
 
         if (filteredOpportunities.length === 0) {
           container.innerHTML = `
-                    <div class="no-opportunities">
-                        <h3>No opportunities found</h3>
-                        <p>Try adjusting your filters or add a new opportunity!</p>
-                    </div>
-                `;
+            <div class="no-opportunities">
+              <h3>No opportunities found</h3>
+              <p>Try adjusting your filters or add a new opportunity!</p>
+            </div>
+          `;
           return;
         }
 
         container.innerHTML = filteredOpportunities
           .sort((a, b) => new Date(b.datePosted) - new Date(a.datePosted))
-          .map(
-            (job) => `
-                <div class="job-card">
-                    <div class="job-header">
-                        <div>
-                            <div class="job-title">${job.role}</div>
-                            <div class="company-name">${job.company}</div>
-                        </div>
-                        ${
-                          job.postedBy === currentUser
-                            ? `
-                        <div class="job-actions">
-                            <button class="edit-btn" onclick="openEditModal(${job.id})" title="Edit">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                        </div>
-                        `
-                            : ""
-                        }
-                    </div>
-                    
-                    <div class="job-details">
-                        <div class="job-detail">
-                            <i class="fas fa-map-marker-alt"></i> ${
-                              job.location
-                            }
-                        </div>
-                        <div class="job-detail">
-                            <i class="fas fa-laptop-house"></i> ${job.workMode}
-                        </div>
-                        ${
-                          job.stipend
-                            ? `<div class="job-detail"><i class="fas fa-money-bill-wave"></i> ${job.stipend}</div>`
-                            : ""
-                        }
-                    </div>
-                    
-                    <div class="job-tags">
-                        <span class="job-tag">${job.type}</span>
-                        <span class="job-tag">PPO: ${job.ppo}</span>
-                    </div>
-                    
-                    ${
-                      job.description
-                        ? `<div class="job-description">${job.description}</div>`
-                        : ""
-                    }
-                    
-                    <div class="job-footer">
-                        <div class="job-meta">
-                            <i class="fas fa-user"></i> Posted by <strong> ${
-                              job.postedBy
-                            } </strong>• <i class="fas fa-clock"></i> ${formatDate(
-              job.datePosted
-            )}
-                        </div>
-                        <a href="${
-                          job.applyLink
-                        }" target="_blank" class="apply-btn">
-                            <i class="fas fa-external-link-alt"></i> Apply Now
-                        </a>
-                    </div>
+          .map(job => `
+            <div class="job-card">
+              <div class="job-header">
+                <div>
+                  <div class="job-title">${job.role}</div>
+                  <div class="company-name">${job.company}</div>
                 </div>
-            `
-          )
-          .join("");
+                ${job.postedBy === currentUser ? `
+                <div class="job-actions">
+                  <button class="edit-btn" onclick="openEditModal(${job.id})" title="Edit">
+                    <i class="fas fa-edit"></i>
+                  </button>
+                </div>` : ''}
+              </div>
+              
+              <div class="job-details">
+                <div class="job-detail">
+                  <i class="fas fa-map-marker-alt"></i> ${job.location}
+                </div>
+                <div class="job-detail">
+                  <i class="fas fa-laptop-house"></i> ${job.workMode}
+                </div>
+                ${job.stipend ? `<div class="job-detail"><i class="fas fa-money-bill-wave"></i> ${job.stipend}</div>` : ''}
+              </div>
+              
+              <div class="job-tags">
+                <span class="job-tag">${job.type}</span>
+                <span class="job-tag">PPO: ${job.ppo}</span>
+              </div>
+              
+              ${job.description ? `<div class="job-description">${job.description}</div>` : ''}
+              
+              <div class="job-footer">
+                <div class="job-meta">
+                  <i class="fas fa-user"></i> Posted by <strong>${job.postedBy}</strong> • <i class="fas fa-clock"></i> ${formatDate(job.datePosted)}
+                </div>
+                <a href="${job.applyLink}" target="_blank" class="apply-btn">
+                  <i class="fas fa-external-link-alt"></i> Apply Now
+                </a>
+              </div>
+            </div>
+          `).join('');
       }
 
       function updateStats() {
-        const totalJobs = opportunities.filter(
-          (op) => op.type === "job"
-        ).length;
-        const totalInternships = opportunities.filter(
-          (op) => op.type === "internship"
-        ).length;
-        const remoteJobs = opportunities.filter(
-          (op) => op.workMode === "remote"
-        ).length;
-        const ppoJobs = opportunities.filter((op) => op.ppo === "yes").length;
+        const totalJobs = opportunities.filter(op => op.type === "job").length;
+        const totalInternships = opportunities.filter(op => op.type === "internship").length;
 
         document.getElementById("totalJobs").textContent = totalJobs;
-        document.getElementById("totalInternships").textContent =
-          totalInternships;
-        document.getElementById("remoteJobs").textContent = remoteJobs;
-        document.getElementById("ppoJobs").textContent = ppoJobs;
-      }
-
-      // Filter Functions
-      function applyFilters() {
-        const search = document
-          .getElementById("searchInput")
-          .value.toLowerCase();
-        const type = document.getElementById("typeFilter").value;
-        const mode = document.getElementById("modeFilter").value;
-        const ppo = document.getElementById("ppoFilter").value;
-        const fromDate = document.getElementById("fromDate").value;
-        const toDate = document.getElementById("toDate").value;
-
-        filteredOpportunities = opportunities.filter((job) => {
-          const matchSearch =
-            !search ||
-            job.company.toLowerCase().includes(search) ||
-            job.role.toLowerCase().includes(search);
-
-          const matchType = !type || job.type === type;
-          const matchMode = !mode || job.workMode === mode;
-          const matchPpo = !ppo || job.ppo === ppo;
-
-          const jobDate = new Date(job.datePosted);
-          const matchFromDate = !fromDate || jobDate >= new Date(fromDate);
-          const matchToDate = !toDate || jobDate <= new Date(toDate);
-
-          return (
-            matchSearch &&
-            matchType &&
-            matchMode &&
-            matchPpo &&
-            matchFromDate &&
-            matchToDate
-          );
-        });
-
-        renderOpportunities();
-      }
-
-      function clearFilters() {
-        document.getElementById("searchInput").value = "";
-        document.getElementById("typeFilter").value = "";
-        document.getElementById("modeFilter").value = "";
-        document.getElementById("ppoFilter").value = "";
-        document.getElementById("fromDate").value = "";
-        document.getElementById("toDate").value = "";
-
-        filteredOpportunities = [...opportunities];
-        renderOpportunities();
-        showToast("Filters cleared", "success");
-      }
-
-      function toggleFilters() {
-        const filterSection = document.getElementById("filterSection");
-        filterSection.classList.toggle("show");
-      }
-
-      // UI Helpers
-      function toggleDropdown() {
-        document.getElementById("userDropdown").classList.toggle("show");
-      }
-
-      function showMyOpportunities() {
-        filteredOpportunities = opportunities.filter(
-          (op) => op.postedBy === currentUser
-        );
-        renderOpportunities();
-        document.getElementById("userDropdown").classList.remove("show");
-        showToast("Showing only your posted opportunities", "success");
-      }
-
-      function logout() {
-        if (confirm("Are you sure you want to logout?")) {
-          window.location.href = "/logout/";
-        }
+        document.getElementById("totalInternships").textContent = totalInternships;
       }
 
       function formatDate(dateString) {
@@ -1698,14 +1712,28 @@
 
       // Toast Notification System
       function showToast(message, type = "success") {
-        const toast = document.getElementById("toast");
-        toast.textContent = message;
-        toast.className = `toast show ${type}`;
-
-        setTimeout(() => {
-          toast.classList.remove("show");
-        }, 3000);
-      }
+  try {
+    const toast = document.getElementById("toast");
+    if (!toast) {
+      console.error("Toast element not found!");
+      return;
+    }
+    
+    // Clear any previous timeouts
+    if (toast._timeout) clearTimeout(toast._timeout);
+    
+    toast.textContent = message;
+    toast.className = "toast"; // Reset classes
+    toast.classList.add(type, "show");
+    
+    // Store timeout reference on the element
+    toast._timeout = setTimeout(() => {
+      toast.classList.remove("show");
+    }, 3000);
+  } catch (error) {
+    console.error("Toast error:", error);
+  }
+}
 
       // Initialize the app when page loads
       document.addEventListener("DOMContentLoaded", initApp);
